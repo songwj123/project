@@ -25,9 +25,7 @@ data ={"company_id": "3854189483301387","user_info": f"'NA:advertising:901723440
 
 
 
-'''
-11111
-'''
+
 
 
 # def _fetch_get_asins(self, asins: str):
