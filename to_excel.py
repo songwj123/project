@@ -1,93 +1,43 @@
 import pandas as pd
 
 
-def save_keywords_to_excel(result, file_name="B0BHRZBHNX.xlsx"):
+def save_keywords_to_excel(result, file_name="B08TV7KP8V.xlsx"):
+    bigwords = result['data'].get('bigwords', [])
+    crwords = result['data'].get('crwords', [])
+    broader_words = result['data'].get('broader_words', [])
+    negative_words = result['data'].get('negative_words', [])
+    crwords_rank = result['data'].get('crwords_rank', {})
+
+    def get_rank_data(words, rank_data):
+        data = []
+        for word in words:
+            rank_info = rank_data.get(word, {})
+            src = ', '.join(rank_info.get('src', [])) if rank_info.get('src') else 'null'
+            rank = rank_info.get('rank', None)
+            data.append({'高转化词': word, '来源': src, '排名': rank})
+        return data
+
+    bigwords_data = [{'大词': word, '来源': 'null', '排名': rank} for word, rank in
+                     zip(bigwords, result['data'].get('bigwords_rank', [None]))]
+    crwords_data = get_rank_data(crwords, crwords_rank)
+
     data = {
-        "Bid Words": result.get('bidwords', []),
-        "CR Words": result.get('crwords', []),
-        "Broader Words": result.get('broader_words', []),
-        "Negative Words": result.get('negative_words', [])
+        "大词": bigwords_data,
+        "高转化词": crwords_data,
+        "广泛词": [{'广泛词': word} for word in broader_words],
+        "否定词": [{'否定词': word} for word in negative_words]
     }
 
     with pd.ExcelWriter(file_name, engine='openpyxl') as writer:
         for sheet_name, keywords in data.items():
-            df = pd.DataFrame(keywords, columns=[sheet_name])
+            df = pd.DataFrame(keywords)
 
-            # Write each DataFrame to a different sheet
             df.to_excel(writer, sheet_name=sheet_name, index=False)
 
-    print(f"Data successfully saved to {file_name}")
+    print(f"数据已成功保存到 {file_name}")
 
 
-result = {'bidwords': ['lap desk', 'laptop stand for bed', 'laptop desk', 'folding desk', 'floor desk', 'bed desk',
-                       'laptop table', 'laptop lap desk', 'lap table', 'lap desk for laptop with cushion',
-                       'laptop bed tray'],
-          'crwords': ['apartment desk', 'work lap table', '25 inch desk', 'wall desk fold down for small spaces',
-                      'tray table lap desk', 'laptop bed tray', 'portable lap desk table', 'lap desk with mouse pad',
-                      'foldable desk', 'bed lap desk', 'folding laptop desk', 'portable lap desk laptop',
-                      'foldable bed lap desk', 'lap tables for adults', 'laptop table for bed',
-                      'portable folding laptop desk', 'folding lap desks kids', 'foldable floor table',
-                      'wood folding desk', 'lap desk with ventilation', 'reading lap desk', 'laptop foldable desk',
-                      'foldable laptop desk', 'lap desk', 'wide foldable laptop desk', 'lap laptop desk 17 inch',
-                      'lap desk with cup holder', 'folding lap desks adults', 'lap desk cushion',
-                      'portable desk for bed', 'laptop lap desk', 'adjustable laptop lap desk', 'portable lap desk',
-                      'raised lap desk', 'lap top bed tray desk', 'laptop tray for couch',
-                      'foldable large laptop lap desk', 'collapsible desk for small spaces', 'bed laptop table',
-                      'folding lap tv tray', 'lap table for couch', 'sofa lap desk', 'lap desk folding chair',
-                      'adjustable lap desk', 'lap board', 'folding computer table', 'laptop lap table',
-                      'folding lap desk 23.6 inch', 'laptop foldable tray', 'lap desk with sides',
-                      'multi media lap desk', 'extra wide lap desk', 'foldable desk table', 'laptop lap desk 17in',
-                      'folding table lap', 'laptop lap stand', 'table bed', 'lap desk couch', 'lap laptop desk',
-                      'white folding desk', 'desk tray lap', 'lap desk foldable', 'lap desk 17 inch laptop',
-                      'computer bed tray for laptop', 'lapdesk for laptop', 'folding lap desk 23.6', 'large lap desk',
-                      'lap desk bed table', 'lap top desk tray', 'folding laptop desk bed', 'small laptop desk',
-                      'computer tray for bed', 'bed table', 'lap stand desk', 'fisyod foldable laptop desk',
-                      'folding desk', 'foldable desk laptop table', 'folding desk chair for small space',
-                      'folding standing laptop desk', 'bed tray for laptop', 'folding desks for small spaces',
-                      'wood lap desk', 'collapsible laptop lap desk', 'lap desk pc', 'desk lap', 'folded laptop desk',
-                      'computer stand for bed', 'floor lap desk', 'space saver desk', 'laptop lap desk wood',
-                      'foldable usb lap desk', 'lap desk with stand', 'lap desk for bed', 'buyify folding lap desk',
-                      'laptop stand for bed', 'no assembly desk', 'folding computer desk', 'foldable computer desk',
-                      'fold up desks for small spaces', 'portable folding desk', 'lap deak', 'folding writing desk',
-                      'folding laptop', 'folding office desk', 'folding lap desk bed', 'folding lap desk with light',
-                      'lap desk with tray', 'folding lap desk', 'folding lap computer desk', 'writing lap desk',
-                      'lap top tray for lap', 'fold down desk', 'foldable sitting desk',
-                      'laptop pillow lap desk for bed', 'foldable computer desk bed', 'travel desk', 'pink lap desk',
-                      'portable lap desk bed table', 'lap desk with storage', 'folding working desk',
-                      'folding sofa desk', 'folding table laptop', 'lap desk with cushion', 'lapdesk with cushion',
-                      'lap homework desk', 'folding lap top desk', 'home office lap desks', 'lapdesk folding',
-                      'lap table', 'laptop lap tray', 'computer lap desk laptop', 'wall mounted desk folding',
-                      'laptop lap desk folding', 'fold away desk', 'laptop cushion for lap', 'folding couch desk',
-                      'portable folding lap desk', 'folding desk bed', 'bed desk foldable', 'fold laptop table',
-                      'lap desk with legs', 'wooden lap desk', 'black folding desk', 'foldable lap deak',
-                      'lap desk laptop', 'foldable keyboard desk', 'computer lap desk', 'lap desk bed', 'lap tray',
-                      'computer tray', 'easy assemble desk', 'foldable laptop desk with storage',
-                      'foldable lap top desk', 'lap tray for laptop', 'foldable study table', 'small lap desk',
-                      'lap table for laptop', 'lap desks for laptops', 'lap desk with light', 'lap folding tray',
-                      'study table for bed', 'escritorio plegable', 'lap desks for adults', 'desk table lap',
-                      'sitting desk', 'small folding desk', 'laptop tray for lap', 'folding floor desk', 'lap desks',
-                      'bed work table for laptop', 'foldable lap desk', 'pillow lap desk', '23.6 lap desk',
-                      'collapsible desk', 'desktop lap table', 'lapdesk', 'work desk for bed', 'origami desk',
-                      'floor foldable desk', 'lap table for bed', 'laptop desk for lap', 'amazon lap desks',
-                      'lap desk for car', 'bed desk table', 'fold up desk', 'folding lap desk laptop',
-                      'bed computer table for laptop', 'computer lap tray', 'laptop tray'],
-          'broader_words': ['lap table', 'laptop desk', 'laptop table', 'bed desk', 'laptop bed tray', 'floor desk'],
-          'negative_words': ['black kitchen', 'mini talbe', 'kitchen movie', 'bes sesk', 'mesa para comer en cama',
-                             'college students', 'bed trays eating kids', 'child tv trays eating',
-                             'kids dinner trays eating', 'reading cup'],
-          'bigwords_rank': [2608, 20444, -1, 15715, -1, -1, -1, 27610, -1, 26259, -1],
-          'crwords_rank': [821149, -1, 1112736, 198961, -1, 187971, -1, 729306, -1, 938500, 1193496, -1, -1, 153541,
-                           76772, -1, -1, 899706, -1, -1, -1, -1, 435059, 2608, -1, -1, 763648, -1, 1193496, 912286,
-                           27610, -1, 378196, -1, -1, 402171, -1, 642496, -1, -1, 1112736, -1, -1, 215093, 579229,
-                           951965, 1042132, -1, -1, -1, -1, 1151750, 589722, -1, -1, 476569, 606119, -1, 522774,
-                           1094316, -1, -1, 887533, 912286, 228739, -1, 327246, -1, -1, -1, 296425, 564084, -1, -1, -1,
-                           15715, -1, 1094316, -1, 435059, 103355, -1, -1, -1, 1112736, -1, 506268, -1, 1131870, -1, -1,
-                           -1, 255004, -1, 20444, 423506, 251809, 288224, 810764, -1, 1010303, -1, -1, 1042132, -1, -1,
-                           -1, 369205, -1, -1, 510243, 288224, -1, 589722, -1, 394655, 995104, -1, 323800, -1, -1, -1,
-                           173361, 450310, -1, -1, -1, -1, 61402, 273001, -1, 925162, -1, 746238, 518533, -1, -1, -1,
-                           -1, -1, 1112736, 1172379, -1, -1, -1, -1, 151236, -1, 59511, 1010303, 1151750, -1, -1,
-                           629853, 781879, 1151750, 344917, 1112736, 629853, -1, 754863, 912286, 42453, -1, 1131870,
-                           122606, 642496, -1, 92872, 1112736, 309516, 938500, -1, 167067, -1, 69736, 1172379, 1193496,
-                           -1, 853035, 222904, 1042132, 600517, 373610, 264788, -1, 404691, 853035, 92012]}
+result ={'code': 0, 'msg': 'success', 'data': {'bigwords': [], 'crwords': ['plant light', 'grow light', 'led grow light', 'plant grow light', 'indoor plant light', 'full spectrum grow light', 'grow lamp', 'plant lamp', 'plant growing lamps', 'full spectrum led grow light', 'grow light stand', 'indoor plant grow light', 'growing light', 'grow light lamp', 'small plant light', 'standing grow light', 'indoor grow light', 'led grow light bulb', 'tall grow light', 'plant growing light', 'standing plant light', 'grow light with stand', 'large grow light', 'plant light with timer', 'full spectrum plant light', 'plant grow lamp', '300 watt grow light', '6500k led grow light', 'solar grow light', 'floor grow light', '100w led grow light', '400 watt grow light', 'plant led light', 'grow lights for cannabis', 'uv plant lights for indoor growing', 'canabis grow light', 'cannabis grow light', 'cactus grow light', 'grow light for cannabis', 'led grow lights full spectrum', 'lbw grow light for indoor plants'], 'broader_words': [], 'negative_words': [], 'bigwords_rank': [], 'crwords_rank': {'plant light': {'src': ['v3'], 'rank': 17979}, 'grow light': {'src': ['v2', 'v3'], 'rank': 7315}, 'led grow light': {'src': ['v2', 'v3'], 'rank': 44217}, 'plant grow light': {'src': ['v3'], 'rank': 65024}, 'indoor plant light': {'src': ['v3'], 'rank': 75910}, 'full spectrum grow light': {'src': ['v3'], 'rank': 78418}, 'grow lamp': {'src': ['v2', 'v3'], 'rank': 187971}, 'plant lamp': {'src': ['v3'], 'rank': 222904}, 'plant growing lamps': {'src': ['v2', 'v3'], 'rank': 227029}, 'full spectrum led grow light': {'src': ['v2', 'v3'], 'rank': 244849}, 'grow light stand': {'src': None, 'rank': 238425}, 'indoor plant grow light': {'src': ['v2', 'v3'], 'rank': 303562}, 'growing light': {'src': None, 'rank': 429235}, 'grow light lamp': {'src': ['v2', 'v3'], 'rank': 459849}, 'small plant light': {'src': ['v3'], 'rank': 487249}, 'standing grow light': {'src': ['v3'], 'rank': 522774}, 'indoor grow light': {'src': ['v2', 'v3'], 'rank': 564084}, 'led grow light bulb': {'src': ['v2'], 'rank': 682958}, 'tall grow light': {'src': ['v3'], 'rank': 899706}, 'plant growing light': {'src': ['v2', 'v3'], 'rank': 995104}, 'standing plant light': {'src': ['v3'], 'rank': 1010303}, 'grow light with stand': {'src': None, 'rank': 1094316}, 'large grow light': {'src': ['v2'], 'rank': 1131870}, 'plant light with timer': {'src': None, 'rank': 1151750}, 'full spectrum plant light': {'src': ['v3'], 'rank': 1632429}, 'plant grow lamp': {'src': ['v2'], 'rank': 1632429}, '300 watt grow light': {'src': ['v2', 'v3'], 'rank': 1965803}, '6500k led grow light': {'src': ['v2'], 'rank': 1965803}, 'solar grow light': {'src': ['v2'], 'rank': 2024633}, 'floor grow light': {'src': ['v3'], 'rank': 2086842}, '100w led grow light': {'src': ['v2'], 'rank': 2152601}, '400 watt grow light': {'src': ['v2'], 'rank': 2152601}, 'plant led light': {'src': ['v3'], 'rank': 2152601}, 'grow lights for cannabis': {'src': ['145w'], 'rank': 221312}, 'uv plant lights for indoor growing': {'src': ['145w'], 'rank': 690305}, 'canabis grow light': {'src': ['145w'], 'rank': 705315}, 'cannabis grow light': {'src': ['145w'], 'rank': 875628}, 'cactus grow light': {'src': ['145w'], 'rank': 951965}, 'grow light for cannabis': {'src': ['145w'], 'rank': 1059020}, 'led grow lights full spectrum': {'src': ['145w'], 'rank': 1151750}, 'lbw grow light for indoor plants': {'src': ['145w'], 'rank': 1364851}}}}
+
 
 save_keywords_to_excel(result)
