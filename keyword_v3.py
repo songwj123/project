@@ -7,21 +7,19 @@ def get_keyword_recommendations(asins, access_token, client_id, profile_id):
     request_payload = {
         "recommendationType": "KEYWORDS_FOR_ASINS",
         "asins": asins,
-        "maxRecommendations": 200,  # 最大推荐数量
+        "maxRecommendations": 100,  # 最大推荐数量
         "sortDimension": "CLICKS",  # 排序维度，使用 {“CONVERSIONS", "CLICKS"} 进行排序
-        "locale": "en_US",  # 语言设置
+        "locale": "en_GB",  # 语言设置
         "biddingStrategy": "AUTO_FOR_SALES",  # 出价策略
         "bidsEnabled": True,  # 是否启用出价建议
     }
-
-    url = f"https://advertising-api.amazon.com/sp/targets/keywords/recommendations"
-
+    url = f"https://advertising-api-eu.amazon.com/sp/targets/keywords/recommendations"
     headers = {
         'Authorization': f'Bearer {access_token}',
         'Amazon-Advertising-API-ClientId': client_id,
         'Amazon-Advertising-API-Scope': profile_id,
-        'Content-Type': 'application/vnd.spkeywordsrecommendation.v3+json',
-        'Accept': 'application/vnd.spkeywordsrecommendation.v3+json'
+        'Content-Type': 'application/vnd.spkeywordsrecommendation.v5+json',
+        'Accept': 'application/vnd.spkeywordsrecommendation.v5+json'
     }
     response = requests.post(url=url, headers=headers, json=request_payload)
     response.raise_for_status()
@@ -29,17 +27,18 @@ def get_keyword_recommendations(asins, access_token, client_id, profile_id):
 
 
 asins = [
-    'B0BHRZBHNX'
+    'B0CL5FGK4V'
 ]
-profile_id = "3854189483301387"
+profile_id = "2223225971933875"
 client_id = "amzn1.application-oa2-client.8c1b204420b3431382419c27cb5e1243"
-access_token = "Atza|IwEBIBVpngKK71EYVI66gWk2HomBy1C7cBHIZyikVXME-1zKBbngvmbljTJ9VEYlBXY-t44E_wb8Et-jTL7C4DQ8l7KryujO0hhBx3lvWxg3PlUyC0aEA2M4HMBSEKO8ORqaGp3zhQycZyW4n0L-9vloZWDsKD1ZLedDb6dyh4q8j8ZlYUAOMm1ywTCx8nPz7IWo_7xLolFUP11uaTErgKGw59mplHKUZ1FgBP5oyLMYofus4lVpFXFgYJg--zyBf-MUzpNCDLQ6l-89LeD1UXlepEsZH6FqqIWy4bO3Pu6dz9KqkRrXuM_LlxdL9yNw-B2JW8DaZkvvkEc9UrUwVnfgDJcCQwSHypO1s7Zufw5LJBJZLn-9-B3i_ORVshGgtGHezgEBCe1nUjCVnKp5yo0VRrZbiWA5huarC7E1kLRhmW3kStH1ubioMeqUVX2X6ub1hBaatCvHpWVhLwpvv-WWWhWMFbMNqIcaiw1gXpWOZrJwFA"
+access_token = ("Atza|IwEBINNimtp_S91FY2UROAB-fgxpXH5nA-wGKq1CCQQjABREFKz4Izk1cJMP8pUZIuAGGmf8S1EXGI360k1iBrZHnUx9Vu24AlSpeuwu8EpKNa5e_CZAqinGHFKCbQM-vOCmliwlctSh41pOWPvM7urwA6WFs9Vr1I4xWS5DZOBwOOhOf30HD49cbVd2buPIV2i2YlpAqGrDrSrf-bu1_RE6kTqGVG2es58DGdZ65sGVhNqBg9qFjo95TEcu1NOx0IJmD0BuiBXKP-oGM4rLkYBJysrW4LtEYpQ_4uI29RigXHPR6_XtTzBvo3Itp0stqI22Ivlu8XOcQdk6hswNIgIUjz1cbxa4vbeL64hbTyeorfc6Sxo6rVGohXAOsh9--HT-m_d11QbDaCXSnjxTD4i_Aag-NVOFPgHQvxo3yf4DG2yzKD1YB1DBPdoHMaICKfg_s8MUO_FspngbKWej8eXdBRTV")
 
 try:
     result = get_keyword_recommendations(asins, access_token, client_id, profile_id)
+    # print(result)
     res_list = []
 
-    for r in result:
+    for r in result["keywordTargetList"]:
         res_list.append(r['keyword'])
     print(res_list)
 except Exception as e:

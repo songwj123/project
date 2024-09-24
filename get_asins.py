@@ -1,3 +1,4 @@
+import openpyxl
 import requests
 import json
 import pandas as pd
@@ -5,7 +6,7 @@ from openpyxl import Workbook
 
 
 def get_asins(access_token, client_id, profile_id, asins, count):
-    url = "https://advertising-api.amazon.com/sp/targets/products/recommendations"
+    url = "https://advertising-api-eu.amazon.com/sp/targets/products/recommendations"
     headers = {
         'Authorization': f'Bearer {access_token}',
         'Amazon-Advertising-API-ClientId': client_id,
@@ -16,11 +17,12 @@ def get_asins(access_token, client_id, profile_id, asins, count):
     data = {
         "adAsins": asins,
         "count": count,
-        "locale": "en_US"
+        "locale": "es_ES"
     }
     response = requests.post(url, headers=headers, json=data)
     if response.status_code == 200:
         response_json = response.json()
+        # return response_json
         recommended_asins = [item['recommendedAsin'] for item in response_json.get('recommendations', [])]
         return recommended_asins
     else:
@@ -28,19 +30,41 @@ def get_asins(access_token, client_id, profile_id, asins, count):
         return []
 
 
-profile_id = "3854189483301387"
+# 将推荐的 ASIN 列表保存到 Excel 文件
+# def save_asins_to_excel(asins, file_name):
+#     workbook = openpyxl.Workbook()
+#     sheet = workbook.active
+#     sheet.title = "ASINs"
+#
+#     # 在第一行添加标题
+#     sheet.cell(row=1, column=1, value="推荐的ASIN")
+#
+#     # 从第二行开始写入ASIN
+#     for idx, asin in enumerate(asins, start=2):
+#         sheet.cell(row=idx, column=1, value=asin)
+#
+#     workbook.save(file_name)
+#     print(f"已保存{file_name}")
+
+
+# 整合两个功能
+# def fetch_and_save_asins(access_token, client_id, profile_id, asins, count, file_name):
+#     recommended_asins = get_asins(access_token, client_id, profile_id, asins, count)
+#     if recommended_asins:
+#         save_asins_to_excel(recommended_asins, file_name)
+
+
+profile_id = "1724874051069213"
 client_id = "amzn1.application-oa2-client.8c1b204420b3431382419c27cb5e1243"
-access_token = "Atza|IwEBIJYKumJHczTPWTj8-rD0-b0u5mFcWvNqSrvPBxqeeB5q4_U4jBNTHAzAtL2sULxOuQxsaE3haU85NcomYXRI5vZ7yO419u1EkvZp1X1ZFbKf24l1so1uHjBGmt_N0NHvQgJuUE1d_X-9kbpzOiigdK9BvKkX77MV9e6DYvnoK1_wPF-htWaxns7fk612zRco_gHn-SaAYsySwMrbuv1aMpN8-629p-PaOpN_twD0WfHjeAeyF20k-ugO0M5PHA_xXbymjwy7ZznHlVJ_aeiF0b8Hw4X_MOlVxYkCbsA0xFiXE6G0N4jv76eg9NLR-LdY-DjT9FpQacz6ogq53ZTpCsaYmR0WOJ8rZLnjPV6SeokY_TIWzNY5mcV0J_hWM7NXq1SQHuo7_FUWGOnDAF8pCxgFPsXmrcS281q1VMPmExt-yQnQbjiISUGxS-7U4QDmMhmKzqX1sdWCwSs6yfGYX4JjbhLUv9XWuWqBDiilE85Wkw"
-asins = ['B0CZP2ZJV2']
+access_token = "Atza|IwEBIKfDJV6YtbeXd90pEIhjZOsOdMRz_Ga0YJUNlEcwVm3Newk0jK9MkM7Oo2grrtRCgbKlBZsICKMNwaPGkXWjamdhAOE-8AY-I8X2u352DJV2nSp7SuwetzvEQQZMkLyWPkiVh4JEViH1dnxEwtcBN8d9TYMuJTAW324fgnLEpgl_AiIo698npvmJDW7UFymnlGZiyo8hOPaTV4udW3VvlH73bnp29L5r81wmSrktjlFaQOaHN5tpOi8_88mvOSnWjcBKHiNJQ3FVc1q6HwOJNOIuBKi0yEIRnGady9cF1vmfvSdPWN3NMSuoUy5gpfZD-YcveyLBNIl0EEPC8KA6lKHpZ6AIl4C9oW-IkwlXsnQAvaeJwu_U0v-eCicqD8-URRg6P3_cA___6vwisNNDLA34oHMgsvgb1VZnEcM4kLiEo9ZxhjtJtxZplsggwF1dl1-7b4Qvozs7HTuNeyUrqlLX5LmF8rbgN0_FWkJRGVWQZQ"
+asins = ['B08LSW56MZ']
 count = 47
+file_name = f"法国-{asins[0]}.xlsx"
 result = get_asins(access_token, client_id, profile_id, asins, count)
-print(result)
+print(json.dumps(result, indent=4, ensure_ascii=False))
+# fetch_and_save_asins(access_token, client_id, profile_id, asins, count, file_name)
+# print(result)
+#
+# data = {"company_id": "3854189483301387", "user_info": f"'NA:advertising:901723440409076962'", "marketplace": "US",
+#         "profile_id": "3854189483301387"}
 
-data = {"company_id": "3854189483301387", "user_info": f"'NA:advertising:901723440409076962'", "marketplace": "US",
-        "profile_id": "3854189483301387"}
-
-'''
-https://affiliate-us.tiktok.com/api/v1/insights/affiliate/creator/search/suggestions?user_language=en&aid=4331&app_name=i18n_ecom_alliance&device_id=0&fp=verify_lzt7u0mm_ey148nR0_8yLR_4RqY_8tWx_isv7TuUKvvuF&device_platform=web&cookie_enabled=true&screen_width=1920&screen_height=1080&browser_language=zh-CN&browser_platform=Win32&browser_name=Mozilla&browser_version=5.0+(Windows+NT+10.0%3B+Win64%3B+x64)+AppleWebKit%2F537.36+(KHTML,+like+Gecko)+Chrome%2F128.0.0.0+Safari%2F537.36&browser_online=true&timezone_name=Asia%2FShanghai&oec_seller_id=7495198257562749707&shop_region=US
-
-
-'''

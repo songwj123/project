@@ -4,22 +4,16 @@ import pandas as pd
 import requests
 
 
-def get_suggested_keywords(asins, max_suggestions, access_token, client_id, profile_id):
-    # 构建API请求头
+def get_keyword_recommendations_v2(access_token, client_id, profile_id, asins):
+    url = "https://advertising-api-eu.amazon.com/v2/sp/asins/suggested/keywords"
     headers = {
-        'Authorization': f'Bearer {access_token}',
-        'Amazon-Advertising-API-ClientId': client_id,
-        'Amazon-Advertising-API-Scope': profile_id,
-        'Content-Type': 'application/json'
+        "Authorization": f"Bearer {access_token}",
+        "Amazon-Advertising-API-ClientId": client_id,
+        "Amazon-Advertising-API-Scope": profile_id,
+        "Content-Type": "application/json"
     }
-
-    data = {
-        'asins': asins,
-        'maxNumSuggestions': max_suggestions
-    }
-
-    response = requests.post(f'https://advertising-api.amazon.com/v2/sp/asins/suggested/keywords',
-                             headers=headers, json=data)
+    payload = {"asins": asins, "maxNumSuggestions": 1000}
+    response = requests.post(url, headers=headers, json=payload)
     if response.status_code == 200:
         data = response.json()
         # return data
@@ -31,17 +25,19 @@ def get_suggested_keywords(asins, max_suggestions, access_token, client_id, prof
         else:
             raise ValueError("Unexpected response format: Expected a list")
     else:
-        response.raise_for_status()  # 抛出异常
+        response.raise_for_status()
 
 
-profile_id = "3854189483301387"
+profile_id = "4377063015685477"
 client_id = "amzn1.application-oa2-client.8c1b204420b3431382419c27cb5e1243"
-access_token = "Atza|IwEBIEizbVmJq1VCLs9ucpNBSFDhRD8PvMn2fMKUSNmRw6C4S4WioCQuOV5M7eXJ0WJWUuE-cN3_ttdRVrGQcHVsRrNVCDr0R8NufbyIVVGT2Xz8ye05idVUd74ey3qFdCd7gQh7PIiKrvihOPhiyJG8YpoTWKFd8wpGdjPB43-1ZicW3OXCSZqp7SE_W-xecXZzm6plnronnNrL25eNOQufUAomOjf5JM-IfSoU6P9g3gBfIHTEbTwhCtG0BhsdiBEK9FKhec_FxhN2iK-l-t454CXCgW-kNvLE2qVZOMB-XmH1hV16Jq8vZ7fhJAlr64BKghQ1sNOn59dVzRHalEvehBZMtSj4g0jqqRH4InHJiGpVhBUbusuCkh8aOdXAsP84tTvBP-oanO-4ygfL2sh0LrPzo9JuHVdjubNLbUDi5WSRUBTuXZ3toWDh6p2eG_vCdwF24Xs41gyCTRir4M7DWy_b"
-asins = ['B0CW3FSBVT']
-max_suggestions = 100
+access_token = "Atza|IwEBIMBk4SYkmoSWTe4_r4enjAXiWWkdDkkI6TLLnffOi0qTfgbu-oDv5DW3GNHNDl0hysIIvz7JCZR6lXyIRAyyJG4VW1BToiymSZiZj4InGSYG4mXwcgkPmBv3pPcrf46Je5tc0yzTt0d3OwJuvpVxn15qT_Li48fFqO9t9kccdwwYewE2ECF3h3LPgHr9q9lBjevtYJzRVnQ3k2zNtaMIV2lUOLVm-YnljP0AuZgnnCSblWP-asUuWb2GYHGnuoIjCl_kE4_ZfXHbqLw62cO1Ctkdgjm7x6pHDHpcM9HLKFdJH3aIodpwGkd4QnWpwokFTURDEfr5-2ioRYu-KHqPJznwrRUIw50Yx7OcGOcoQ1rRn5h-IsfmEHEFjG5osC2qpixtLRREo2bn7ujDGLpyX_zV5DaIGtvzYQcSUY-P_oQ_3KjKXsg6dO4YAfXPKitdUZmb5joUMICxOGJWv7qsuXBK"
+
+asins = [
+    "B0D6VT58SM"
+]
 
 try:
-    result = get_suggested_keywords(asins, max_suggestions, access_token, client_id, profile_id)
+    result = get_keyword_recommendations_v2(access_token, client_id, profile_id, asins)
     print(json.dumps(result, indent=4))
 except Exception as e:
     print(f'Error: {e}')

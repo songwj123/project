@@ -1,7 +1,10 @@
-﻿import pandas as pd
+import pandas as pd
 import requests
 import json
 import ast
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
 
 
 def decode_unicode(input_data):
@@ -17,7 +20,7 @@ def decode_unicode(input_data):
 
 
 def get_keyword_recommendations_v2(api, access_token, client_id, profile_id, asins):
-    url = F"{api}/v2/sp/asins/suggested/keywords"
+    url = f"{api}/v2/sp/asins/suggested/keywords"
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Amazon-Advertising-API-ClientId": client_id,
@@ -28,10 +31,8 @@ def get_keyword_recommendations_v2(api, access_token, client_id, profile_id, asi
     response = requests.post(url, headers=headers, json=payload)
     if response.status_code == 200:
         data = response.json()
-
         if isinstance(data, list):
             keywords = [item.get('keywordText', '') for item in data if isinstance(item, dict)]
-
             return keywords
         else:
             raise ValueError("Unexpected response format: Expected a list")
@@ -53,7 +54,7 @@ def get_keyword_recommendations_v3(api, access_token, client_id, profile_id, asi
         "asins": asins,
         "maxRecommendations": 200,
         "sortDimension": "CLICKS",
-        "locale": "es_ES",
+        "locale": "en_GB",
         "biddingStrategy": "AUTO_FOR_SALES",
         "bidsEnabled": True,
     }
@@ -61,11 +62,7 @@ def get_keyword_recommendations_v3(api, access_token, client_id, profile_id, asi
     response.raise_for_status()
     results = response.json()
     if response.status_code == 200:
-        # return json.dumps(results, indent=4)
-        res_list = []
-
-        for r in results["keywordTargetList"]:
-            res_list.append(r['keyword'])
+        res_list = [r['keyword'] for r in results["keywordTargetList"]]
         return res_list
     else:
         response.raise_for_status()
@@ -83,7 +80,7 @@ def get_asins(api, access_token, client_id, profile_id, asins):
     data = {
         "adAsins": asins,
         "count": 47,
-        "locale": "es_ES"
+        "locale": "en_GB"
     }
     res = requests.post(url, headers=headers, json=data)
     if res.status_code == 200:
@@ -127,26 +124,61 @@ def send_keywords_retrieval_request(api, access_token, client_id, profile_id, as
     return response.json()
 
 
-profile_id = "2223225971933875"
-client_id = "amzn1.application-oa2-client.8c1b204420b3431382419c27cb5e1243"
-access_token = "Atza|IwEBIPDwQ3THzaFOWduvcoIyvlsLTHW9EbzLecWZuKjlfiPbT2LFAWzf3NVne-TPwlx9WjucplAvP5CO1_-WHCgOn8WFZWD0y9RiHzH2yZYTlQMNsNKq1PfyO2RpxCHHrpVTucE8q9_BItonRkkJ2JvdcPU8crnmuzgN6lnaTb2iwGh9cOPJVN4o0N7NuMIGsnQybr9DBoTExCDJRJyFYA-1M_n-n1lAY1wWBjzfJfmf7YzyNrr0Sm8_-BdxP5_-PbVF6nVpRWF0NO9YoQSCgEAKU_2ZJjpl9K4o41a8JYRSqfTMcFwB2tEjEz_JocQqvC97nv4JmVH0VavaWA6XRiHYMzB2E9puF0qod3wtC3x7X5_XhYNIMq73Mp_hNKRH7IefIS8dwqDtUdlr1ltx6XzbVxAICDdOw0NlbDQzCOzRJccQm8uO7De8Fi5Bsl2EgWgFbD8sLqELez27ADeUeklViTKtFqyHdO7hdGnq4AuGVf_EHA"
+def save_keywords_to_excel(result, asins):
+    bigwords = result['data'].get('bigwords', [])
+    crwords = result['data'].get('crwords', [])
+    broader_words = result['data'].get('broader_words', [])
+    negative_words = result['data'].get('negative_words', [])
+    crwords_rank = result['data'].get('crwords_rank', {})
 
-asins = [
-    "B0D9YBRZL4"
-]
-api = "https://advertising-api-eu.amazon.com"
-country = "GB"
-subject = "LED Flash-White"
-title = "elestyle Wireless Doorbell with 2 Receivers, 150M Long Range Door Bells Battery Operated, Door Chime kit with 60 Melodies, 4 Volume Levels, LED Flash-White"
-description = """Dual Receiver Design: The wireless doorbell comes with two receivers, perfect for larger homes, ensuring you hear the doorbell clearly from any corner of your house.
-60 Melodies to Choose From: With 60 different chimes built-in, you can easily customize your doorbell sound to match your personal preferences.
-Adjustable Volume with 4 Levels: The doorbell features four adjustable volume levels, allowing you to set the perfect sound level for your environment, ensuring you never miss a visitor.
-Long Wireless Range up to 150m: With a wireless transmission range of up to 150 meters, the doorbell maintains a strong connection even in multi-story buildings, free from distance limitations.
-Easy Installation and Durable: Designed for convenience, this wireless doorbell is easy to install and built to last, requiring minimal maintenance, making it an ideal choice for home security.
-"""
-result = send_keywords_retrieval_request(api, access_token, client_id, profile_id, asins, subject, title, description,
-                                         country)
-print(result)
-'''
-ES/FR/GB/DE
-'''
+    def get_rank_data(words, rank_data):
+        data = []
+        for word in words:
+            rank_info = rank_data.get(word, {})
+            src = ', '.join(rank_info.get('src', [])) if rank_info.get('src') else ' '
+            rank = rank_info.get('rank', None)
+            data.append({'高转化词': word, '来源': src, '排名': rank})
+        return data
+
+    bigwords_data = [{'大词': word, '来源': ' ', '排名': rank} for word, rank in
+                     zip(bigwords, result['data'].get('bigwords_rank', [None]))]
+    crwords_data = get_rank_data(crwords, crwords_rank)
+
+    data = {
+        "大词": bigwords_data,
+        "高转化词": crwords_data,
+        "广泛词": [{'广泛词': word} for word in broader_words],
+        "否定词": [{'否定词': word} for word in negative_words]
+    }
+
+    with pd.ExcelWriter(f"{asins[0]}.xlsx", engine='openpyxl') as writer:
+        for sheet_name, keywords in data.items():
+            df = pd.DataFrame(keywords)
+            df.to_excel(writer, sheet_name=sheet_name, index=False)
+
+    print(f"数据已成功保存到{asins[0]}.xlsx")
+
+
+@app.route('/retrieve_keywords', methods=['POST'])
+def retrieve_keywords():
+    data = request.json
+    asins = data.get('asins')
+    country = data.get('country')
+    subject = data.get('subject')
+    title = data.get('title')
+    description = data.get('description')
+    profile_id = "2223225971933875"
+    client_id = "amzn1.application-oa2-client.8c1b204420b3431382419c27cb5e1243"
+    access_token = "<YOUR_ACCESS_TOKEN>"
+    api = "https://advertising-api-eu.amazon.com"
+
+    result = send_keywords_retrieval_request(api, access_token, client_id, profile_id, asins, subject, title,
+                                             description, country)
+
+    save_keywords_to_excel(result, asins)
+
+    return jsonify(result)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

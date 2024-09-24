@@ -20,7 +20,7 @@
 #     )
 #     return response
 
-data ={"company_id": "3854189483301387","user_info": f"'NA:advertising:901723440409076962'","marketplace": "US","profile_id": "3854189483301387"}
+# data ={"company_id": "3854189483301387","user_info": f"'NA:advertising:901723440409076962'","marketplace": "US","profile_id": "3854189483301387"}
 
 
 
@@ -82,3 +82,6 @@ songwj
 #
 #
 # print(_fetch_get_asins('B0CZP2ZJV2'))
+import json
+dd = ['car phone mount', 'magsafe car mount', 'car mount', 'cell phone car mount', 'phone mount', 'cell phone holder car', 'phone holder', 'phone holder car', 'car phone holder charger', 'car phone holder mount', 'cell phone holder', 'car vent phone mount', 'suction cup phone mount', 'magnetic phone holder car', 'dashboard cell phone holder', 'wireless car charger mount', 'car phone mount charger', 'iphone holder car', 'car mount iphone', 'dashboard phone holder', 'windshield phone mount', 'suction phone holder', 'suction phone mount', 'cellphone holder car', 'iphone 15 car mount', 'car', 'phone holders your car', 'suction cup phone holder', 'phone stand car', 'truck phone holder', 'pink car phone holder', 'car phone holder vent', 'soporte de telefono para carro', 'car phone holder wireless charger', 'iphone mount', 'cupholder phone holder car', 'car accessories', 'iphone 14 car mount', 'cup phone holder car', 'suction cup mount', 'porta telefono para carro', 'dashboard car phone holder', 'windshield phone mount car', 'rhinestone car phone holder mount', 'porta celular para carro', 'phone holder car windshield', 'pink car phone mount', 'dash phone holder car', 'car mobile holder', 'car phone holders iphone', 'auto phone holder', 'phone mount truck', 'sticky phone mount', 'universal car dashboard phone holder', 'gps holder', 'soporte para celular', 'car phone holder top rated', 'truckers phone mount', 'car tripod', 'universal car phone holders', 'phone car mount dashboard', 'cars stuff', 'sujetador de celular para carro', 'car phone holder mount windshield', 'soporte de celular para carro', 'cell phone accessories', 'one touch car phone holder', 'batman popsocket', 'cell phone holder car windshield', 'mobile phone car holder', 'car electronic', 'electronic mount', 'suction cup cell phone holder', 'phone holder with suction cup', 'car phone holder clip mount', 'car phone mount bundle', 'telephone holder car', 'window phone mount car', 'car phone holder ball mount', 'best phone mount car', 'car phone holder glass mount', 'suction cup car phone mount', 'car phone holder strong suction', 'cupholder car phone mount', 'windshield mounting phone holder', 'nissan rogue 2017', 'phone holder car mirror', 'portacelular para carro', 'soft phone stand', 'best phone holder car', 'car holder mount', 'bmw car phone holder']
+print(json.dumps(dd))
