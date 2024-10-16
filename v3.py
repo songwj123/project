@@ -1,4 +1,4 @@
-﻿import pandas as pd
+import pandas as pd
 import requests
 import json
 import ast
@@ -45,15 +45,15 @@ def get_keyword_recommendations_v3(api, access_token, client_id, profile_id, asi
         'Authorization': f'Bearer {access_token}',
         'Amazon-Advertising-API-ClientId': client_id,
         'Amazon-Advertising-API-Scope': profile_id,
-        'Content-Type': 'application/vnd.spkeywordsrecommendation.v5+json',
-        'Accept': 'application/vnd.spkeywordsrecommendation.v5+json'
+        'Content-Type': 'application/vnd.spkeywordsrecommendation.v3+json',
+        'Accept': 'application/vnd.spkeywordsrecommendation.v3+json'
     }
     request_payload = {
         "recommendationType": "KEYWORDS_FOR_ASINS",
         "asins": asins,
         "maxRecommendations": 200,
         "sortDimension": "CLICKS",
-        "locale": "en_GB",
+        "locale": "en_US",
         "biddingStrategy": "AUTO_FOR_SALES",
         "bidsEnabled": True,
     }
@@ -82,7 +82,7 @@ def get_asins(api, access_token, client_id, profile_id, asins):
     data = {
         "adAsins": asins,
         "count": 47,
-        "locale": "en_GB"
+        "locale": "en_US"
     }
     res = requests.post(url, headers=headers, json=data)
     if res.status_code == 200:
@@ -94,8 +94,7 @@ def get_asins(api, access_token, client_id, profile_id, asins):
         return None
 
 
-def send_keywords_retrieval_request(api, access_token, client_id, profile_id, asins, subject, title, description,
-                                    country):
+def send_keywords_retrieval_request(api, access_token, client_id, profile_id, asins, subject, title, description):
     keyword2 = get_keyword_recommendations_v2(api, access_token, client_id, profile_id, asins)
     keyword3 = get_keyword_recommendations_v3(api, access_token, client_id, profile_id, asins)
     similar_asins = get_asins(api, access_token, client_id, profile_id, asins)
@@ -107,12 +106,12 @@ def send_keywords_retrieval_request(api, access_token, client_id, profile_id, as
         "keywords_v3": decode_unicode(keyword3)
     }
 
-    url = "http://120.27.208.224:8003/keywords_retrival4"
+    url = "http://120.27.208.224:8003/keywords_retrival3"
     payload = {
         "asin": str(asins[0]),
         "subject": subject,
         "title": decoded_data["title"],
-        "country_code": country,
+        # "country_code": country,
         "similar_asins": similar_asins,
         "description": decoded_data["description"],
         "keywords": {
@@ -121,30 +120,28 @@ def send_keywords_retrieval_request(api, access_token, client_id, profile_id, as
         }
     }
 
-    # response = requests.post(url, json=payload)
+    response = requests.post(url, json=payload)
     print(json.dumps(payload, indent=4))
-    # return response.json()
+    return response.json()
 
 
-profile_id = "1724874051069213"
+profile_id = "2651906346803655"
 client_id = "amzn1.application-oa2-client.8c1b204420b3431382419c27cb5e1243"
-access_token = "Atza|IwEBIOwvaDIdq7EAbwdu5wh4pwmAMZq7jB4J4EHLK2AO7cOtEHKEk3XbjKNiffwV8F7Hvasd1XeJMggcIC5ldPWIfZ25EdtVTkmt6q8T4qzYbQgQ-_yGCD8FeHA6vYTZV35w9wRzO6LLXsnIPWYUwpL4Jli44h70RaGH3OHCOuwraB90xMTuDhamVTRMIHC0zA_mqCtYZfMbSzTrHU1nJM50bX2tWlgnQ8vqIELA6hl35ZxoxCxYQKBVud9dTLDDoiay_XfR18kbkDuB9wzHp6W5IkP2m0DfKYEcInn8PrnEz1rFcx_TisJ-Nr---e0zEyqT6omZ-AcLgq-yrrafB8p1SpiXOHOCgRXPJ2_yWcJzw8KIPK7KJq2ZWf3EpwJ6gn_IwK6H99fUWOLaiEg-rUkMlyboPhlrCH2higVcP3RiMF_gPanQBz431SEK6JeVLgoYtRXq_O3zDXwv7xkF6MmUbjW3Um9ZqschAhsV0PM74PhxkQ"
+access_token = "Atza|IwEBIBDGb7TqKVyjYFxVz6Jz3Dyvz9kd3j_zR1eFtyUE4tUfP6BPZHt-CKqh5isgn9Knrk8IhtrK913c1zN9qE1vIMXIa3mjXT-dwQgyE1nlnuVfxSkZGPiICYee1oKGJuFUlJlzCTkvhCnmqzws2GVuPZUEm2Hd1b5LuGYHySfgK5W3u6jiiA1VYi_b7IcXyNfmbVTm4f3jDgYi-uzX6oeEyi0a8jSMfyaI8xyvXGSZkOI3syuda4KArnbqLu5qU9bu9vhp_bY8uereH7879wy9o6rJoHm-6sg_BpzsEdA3iursg9a2YWc3vxA6OUU9BcJKLJFP4E-FgRPxGjBMQXPLMtSOKlCLJJjpW4hAdMfAGrg96giwTdJ_UmhJ1h8IDKK8Op6CdUoPAHtbe_ZN8ROPlaUmaYbrpKK3Csi56k25REezx0RznTnCzPH0ChT_UZaxW8ull9EfnKWiOse-RhyYoS4C"
+asins = ['B0D8Q15LPC']
+api = "https://advertising-api.amazon.com"
+# country = "GB"
+subject = "Facial Hair Remover for Women"
+title = "Facial Hair Remover for Women, Face Hair Trimmer, Rechargeable Women's Facial Shaver, Painless Lady Shavers for Women for Face Hair, Upper Lips, Peach Fuzz, Bikini Body-White"
 
-asins = [
-    "B0C36YBG3J"
-]
-api = "https://advertising-api-eu.amazon.com"
-country = "GB"
-subject = "corralito bebe"
-title = "Parque de juegos para bebés, centro de actividades para niños en interiores y exteriores con base antideslizante, patio de juegos de seguridad resistente con malla transpirable súper suave…"
-description = """EL TAMAÑO MÁS ADECUADO: YOBEST ofrece una variedad de diferentes tamaños y colores de vallas para satisfacer el tamaño del espacio de diferentes familias, 150*180*69cm, 150x190x69cm, 200x200x69cm, 125*125*69cm, para proporcionar a su pequeño un espacio de juego independiente para que su pequeño gatee, camine, se ponga de pie y juegue libremente. Además, la altura científica de 69 cm no bloqueará la vista del bebé, sino que evitará que su niño gatee.
-LIBERA LAS MANOS DE LA MADRE: los pequeños necesitan el cuidado de la madre todo el tiempo, sin embargo, cuando tienes varias cosas, no siempre puedes prestar atención a tu bebé. Afortunadamente, el corralito de YOBEST puede convertir cualquier lugar en un gran parque infantil seguro. Deje que sus bebés jueguen libremente, aprendan a ponerse de pie y a caminar con seguridad, ayudando a su bebé a explorar y percibir el mundo, las madres pueden soltar sus manos y hacer sus propias cosas.
-SEGURIDAD Y RESISTENCIA: Los corrales de juego de YOBEST Baby están hechos de material de tela catiónica de encriptación resistente y de tubo de acero fuerte, hay 4 ventosas antideslizantes de seguridad robustas en la parte inferior, que son difíciles de mover o volcar. Al mismo tiempo, nuestra valla está completamente envuelta en tela suave, no hay peligro de pellizcos, y es más segura que el corralito de plástico para bebés.
-DISEÑO DE VISIÓN 360°：Los corrales para bebés están rodeados de rejillas transparentes y transpirables. Tanto si el bebé está tumbado como sentado, puede ver a la madre fuera de la valla. La valla de juego para bebés está fuera de la cremallera para evitar que el bebé salga accidentalmente. Plus you can keep all your baby's toys in one area away from the pet hair or getting knocked over.
-AFTER-SALES SERVICE: YOBEST baby fences have served more than 3.74 million families and received good market witness Easy to disassemble, assemble and storage(no tools required). If you have any questions about the product, please contact us in time, we will reply you within 8 hours.
+description = """Facial Hair Remover for Women: The facial epilator can quickly and gently remove facial hair, including upper lip hair, peach fuzz, and more. Smooth, painless, precise hair removal, smoothing skin and preventing skin damage.
+Easy to clean: The facial epilator is very easy to clean, just unscrew the blade part, clean the hair with a cleaning brush, and rinse directly with water.
+USB Rechargeable: This facial epilator is equipped with USB charging function, eliminating the trouble of frequent battery replacement, convenient and environmentally friendly.
+Compact and Portable: The mini and portable design makes it easy to carry in your purse or travel bag. Whether you're at home or on the go, maintain a flawless look with this compact hair removal device.
+Built-in LED Light: Enhance visibility during use with the built-in LED light feature. Illuminate the treatment area for precise and thorough hair removal, ensuring you achieve the desired results with ease.
+⚠️Please note: We offer 30 days returns and 7*24 hours customer service. If you have any problems during use, please feel free to contact us and we will provide you with timely and efficient after-sales service.
 """
-result = send_keywords_retrieval_request(api, access_token, client_id, profile_id, asins, subject, title, description,
-                                         country)
+result = send_keywords_retrieval_request(api, access_token, client_id, profile_id, asins, subject, title, description)
 print(result)
 '''
 ES/FR/GB/DE

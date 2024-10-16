@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def save_keywords_to_excel(result, file_name="德国-B0D6VT58SM.xlsx"):
+def save_keywords_to_excel(result, file_name="11111.xlsx"):
     bigwords = result['data'].get('bigwords', [])
     crwords = result['data'].get('crwords', [])
     broader_words = result['data'].get('broader_words', [])
@@ -43,52 +43,364 @@ result = {
     "data": {
         "bigwords": [],
         "crwords": [
-            "head shaver",
-            "hair shaver",
-            "kopfrasierer glatze",
-            "glatzen rasierer",
-            "konturen rasierer herren",
-            "kopf rasierer herren",
-            "rotationsrasierer für herren",
-            "rasierer elektrisch herren",
-            "rasierer glatze",
-            "rasierer kopf glatze",
-            "glatzen rasierer herren 0 mm",
-            "rasierer herren elektrisch kopf",
-            "nassrasierer herren elektrisch",
-            "kopf rasierer",
-            "rasierer glatze herren",
-            "head shaver men",
-            "kopfrasierer glatze 0 mm",
-            "rasierer für glatze",
-            "kopfrasierer 1mm"
+            "sleep mask",
+            "eye mask",
+            "eye massager",
+            "fsa eligible items only list",
+            "eye care",
+            "renpho eye massager",
+            "heated eye mask",
+            "sleep mask with bluetooth headphones",
+            "face care",
+            "bluetooth sleep mask",
+            "head massager scalp stress relax",
+            "eye mask sleep",
+            "eye health",
+            "eye mask massager",
+            "therabody eye goggles",
+            "eyeris 3 eye massager",
+            "heated eye massager",
+            "eye massage",
+            "smart goggles",
+            "massaging eye mask",
+            "bluetooth eye mask",
+            "eye massager with heat",
+            "migraine eye mask",
+            "migraine massager",
+            "sinus massager",
+            "migraine eye massager",
+            "therabody smart goggles",
+            "temple massager",
+            "eye massager with heat renpho",
+            "eye massage mask",
+            "eye strain",
+            "heat massager",
+            "face massager mask",
+            "smart sleep mask",
+            "migraine relief massager",
+            "masajeador de ojos",
+            "eye mask massager with heat",
+            "sinus massager with heat",
+            "massage mask",
+            "eye massager with cooling",
+            "serenity tension relief pro migraine",
+            "headache massager for migraines",
+            "migraine relief gadget"
         ],
         "broader_words": [],
         "negative_words": [
-            "haarschneidemaschine für glatze"
+            "renpho eyeris 3",
+            "sleep mask men",
+            "renpho eyeris 1"
         ],
-        "bigwords_rank": [],
+        "bigwords_rank": {},
         "crwords_rank": {
-            "head shaver": 157558,
-            "hair shaver": 445121,
-            "kopfrasierer glatze": 32793,
-            "glatzen rasierer": 40040,
-            "konturen rasierer herren": 72239,
-            "kopf rasierer herren": 109187,
-            "rotationsrasierer für herren": 110376,
-            "rasierer elektrisch herren": 149003,
-            "rasierer glatze": 159790,
-            "rasierer kopf glatze": 196738,
-            "glatzen rasierer herren 0 mm": 211610,
-            "rasierer herren elektrisch kopf": 219912,
-            "nassrasierer herren elektrisch": 228852,
-            "kopf rasierer": 238570,
-            "rasierer glatze herren": 279668,
-            "head shaver men": 325986,
-            "kopfrasierer glatze 0 mm": 365524,
-            "rasierer für glatze": 388888,
-            "haarschneidemaschine für glatze": 429463,
-            "kopfrasierer 1mm": 445121
+            "sleep mask": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 555
+            },
+            "eye mask": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 1018
+            },
+            "eye massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 14274
+            },
+            "fsa eligible items only list": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 3409
+            },
+            "eye care": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 16357
+            },
+            "renpho eye massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 38874
+            },
+            "heated eye mask": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 29483
+            },
+            "sleep mask with bluetooth headphones": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 43135
+            },
+            "face care": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 66120
+            },
+            "bluetooth sleep mask": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 67062
+            },
+            "head massager scalp stress relax": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 102980
+            },
+            "eye mask sleep": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 180678
+            },
+            "eye health": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 270665
+            },
+            "eye mask massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 375905
+            },
+            "therabody eye goggles": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 441025
+            },
+            "eyeris 3 eye massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 469619
+            },
+            "heated eye massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 480118
+            },
+            "eye massage": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 487249
+            },
+            "renpho eyeris 3": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 518533
+            },
+            "smart goggles": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 535925
+            },
+            "massaging eye mask": {
+                "src": "null",
+                "rank": 564084
+            },
+            "bluetooth eye mask": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 606119
+            },
+            "eye massager with heat": {
+                "src": "null",
+                "rank": 611855
+            },
+            "migraine eye mask": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 705315
+            },
+            "migraine massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 800966
+            },
+            "sleep mask men": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 810764
+            },
+            "sinus massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 912286
+            },
+            "migraine eye massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 938500
+            },
+            "therabody smart goggles": {
+                "src": "null",
+                "rank": 1112736
+            },
+            "temple massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 1151750
+            },
+            "eye massager with heat renpho": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 1172379
+            },
+            "eye massage mask": {
+                "src": "null",
+                "rank": 1237887
+            },
+            "eye strain": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 1632429
+            },
+            "heat massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 1715421
+            },
+            "face massager mask": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 1715421
+            },
+            "smart sleep mask": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 1715421
+            },
+            "migraine relief massager": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 1857948
+            },
+            "masajeador de ojos": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 1965803
+            },
+            "eye mask massager with heat": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 2086842
+            },
+            "sinus massager with heat": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 2152601
+            },
+            "massage mask": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 2374659
+            },
+            "eye massager with cooling": {
+                "src": [
+                    "v2",
+                    "v3"
+                ],
+                "rank": 2458639
+            },
+            "serenity tension relief pro migraine": {
+                "src": [
+                    "145w"
+                ],
+                "rank": 450310
+            },
+            "renpho eyeris 1": {
+                "src": [
+                    "145w"
+                ],
+                "rank": 1076322
+            },
+            "headache massager for migraines": {
+                "src": [
+                    "145w"
+                ],
+                "rank": 1131870
+            },
+            "migraine relief gadget": {
+                "src": [
+                    "145w"
+                ],
+                "rank": 1337327
+            }
         }
     }
 }

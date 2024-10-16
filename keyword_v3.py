@@ -13,7 +13,7 @@ def get_keyword_recommendations(asins, access_token, client_id, profile_id):
         "biddingStrategy": "AUTO_FOR_SALES",  # 出价策略
         "bidsEnabled": True,  # 是否启用出价建议
     }
-    url = f"https://advertising-api-eu.amazon.com/sp/targets/keywords/recommendations"
+    url = f"https://advertising-api.amazon.com/sp/targets/keywords/recommendations"
     headers = {
         'Authorization': f'Bearer {access_token}',
         'Amazon-Advertising-API-ClientId': client_id,
@@ -27,11 +27,11 @@ def get_keyword_recommendations(asins, access_token, client_id, profile_id):
 
 
 asins = [
-    'B0CL5FGK4V'
+    'B0D5TR7BF9'
 ]
-profile_id = "2223225971933875"
+profile_id = "2651906346803655"
 client_id = "amzn1.application-oa2-client.8c1b204420b3431382419c27cb5e1243"
-access_token = ("Atza|IwEBINNimtp_S91FY2UROAB-fgxpXH5nA-wGKq1CCQQjABREFKz4Izk1cJMP8pUZIuAGGmf8S1EXGI360k1iBrZHnUx9Vu24AlSpeuwu8EpKNa5e_CZAqinGHFKCbQM-vOCmliwlctSh41pOWPvM7urwA6WFs9Vr1I4xWS5DZOBwOOhOf30HD49cbVd2buPIV2i2YlpAqGrDrSrf-bu1_RE6kTqGVG2es58DGdZ65sGVhNqBg9qFjo95TEcu1NOx0IJmD0BuiBXKP-oGM4rLkYBJysrW4LtEYpQ_4uI29RigXHPR6_XtTzBvo3Itp0stqI22Ivlu8XOcQdk6hswNIgIUjz1cbxa4vbeL64hbTyeorfc6Sxo6rVGohXAOsh9--HT-m_d11QbDaCXSnjxTD4i_Aag-NVOFPgHQvxo3yf4DG2yzKD1YB1DBPdoHMaICKfg_s8MUO_FspngbKWej8eXdBRTV")
+access_token = "Atza|IwEBINnql-ktVkvXFdPJHaxsxnSrq6YaGS2XR4gg6VW8dPXE5JssOBClFZ1cR7JQk7by8GPLnktgRW_kIGguRr0btFukEXY0CxZbHyg5g6hntxjvmsS9FJfBLBbbpWHVtAqpF8RRHgPX-3Azd3yBUMAuASjGyWOJ-k5R8GkNBMJ--4N0tK8Jl_N8GvB4Lz2CUmucMwhbWpUYAgNFO3eFDA3RGieRK6isa0P4YEpBdPWWkxcCejEPYX1yxO_O6kd29-Qg8P5XHDSm056j1GhxQwdiatQ9wB_uyozLrZCITG3P7GmDmqG9fXZg8-0Ab3ybkf4uJMACuD1ZoPaJnWUj89x_n2DDo5UZK7XeZwYb2KTGtLjta73FyZ1c1IT_hE6n-uJsFzOBplm3_1khn6ovPscAI8agLeM1MtzkafmBr6BvO1w2SNLocn6kt5ZiRFMzmjK6ozS9hb4auz9FOvB6wD1yC5cSnW_2JGDHPqLlYs9qp-UTMQ"
 
 try:
     result = get_keyword_recommendations(asins, access_token, client_id, profile_id)
@@ -40,6 +40,10 @@ try:
 
     for r in result["keywordTargetList"]:
         res_list.append(r['keyword'])
-    print(res_list)
+    print(json.dumps(res_list, indent=4))
 except Exception as e:
     print(f'Error: {e}')
+'''
+
+
+'''

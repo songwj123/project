@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def save_keywords_to_excel(result, file_name="法国-B0D6BL23MT-2.xlsx"):
+def save_keywords_to_excel(result, file_name="法国-B0D5Y7FBF4.xlsx"):
     bigwords = result['data'].get('bigwords', [])
     crwords = result['data'].get('crwords', [])
     broader_words = result['data'].get('broader_words', [])
@@ -34,81 +34,39 @@ result = {
     "code": 0,
     "msg": "success",
     "data": {
-        "bigwords": [
-            "rasoir electrique femme",
-            "epilateur electrique femme",
-            "epilateur visage femme",
-            "epilateur electrique",
-            "épilateur électrique",
-            "rasoir électrique femme",
-            "épilateur électrique femme"
-        ],
+        "bigwords": [],
         "crwords": [
-            "rasoir visage femme",
-            "rasoir femme electrique",
-            "epilateur electrique femme sans fil",
-            "rasoir visage",
-            "rasoir sourcil femme",
-            "epilation visage femme",
-            "rasoir femme visage",
-            "rasoirs électriques femme",
-            "flawless epilateur visage",
-            "épilation visage femme",
-            "epilateur femme",
-            "epilateur moustache femme",
-            "epilateur sans fil",
-            "epilation visage",
-            "tondeuse visage femme"
+            "posture corrector",
+            "posture correcteur dos",
+            "maintien dos",
+            "ceinture pour le dos",
+            "posture pro",
+            "mal de dos",
+            "tshirt redresseur de dos",
+            "truefit posture corrector",
+            "ceinture dorsale",
+            "perko dos femme",
+            "ceinture maintien dos"
         ],
-        "broader_words": [
-            "rasoir electrique femme",
-            "epilateur electrique femme",
-            "epilateur visage femme",
-            "epilateur electrique",
-            "épilateur électrique",
-            "rasoir électrique femme",
-            "épilateur électrique femme"
-        ],
+        "broader_words": [],
         "negative_words": [
-            "epilateur electrique femme maillot",
-            "epilateur lumiere pulsée",
-            "epilateur lumière pulsée",
-            "rasoir tondeuse femme",
-            "rasoir partie intime femme"
+            "appareil massage dos"
         ],
-        "bigwords_rank": [
-            2767,
-            378,
-            5282,
-            8346,
-            16181,
-            28085,
-            44248
-        ],
+        "bigwords_rank": [],
         "crwords_rank": {
-            "rasoir electrique femme": 2767,
-            "epilateur visage femme": 5282,
-            "epilateur electrique femme": 378,
-            "epilateur electrique": 8346,
-            "rasoir visage femme": 10523,
-            "épilateur électrique": 16181,
-            "rasoir femme electrique": 17400,
-            "rasoir électrique femme": 28085,
-            "epilateur electrique femme sans fil": 23536,
-            "rasoir visage": 42647,
-            "rasoir sourcil femme": 48952,
-            "épilateur électrique femme": 44248,
-            "epilation visage femme": 45334,
-            "rasoir femme visage": 47668,
-            "rasoirs électriques femme": 47668,
-            "flawless epilateur visage": 72392,
-            "épilation visage femme": 75203,
-            "epilateur femme": 88391,
-            "epilateur moustache femme": 101588,
-            "epilateur sans fil": 106813,
-            "epilation visage": 125643,
-            "tondeuse visage femme": 152050
-        }
+            "posture corrector": 98738,
+            "posture correcteur dos": 16374,
+            "maintien dos": 38123,
+            "ceinture pour le dos": 40297,
+            "posture pro": 42183,
+            "mal de dos": 48952,
+            "tshirt redresseur de dos": 44791,
+            "truefit posture corrector": 61866,
+            "ceinture dorsale": 65019,
+            "perko dos femme": 71083,
+            "ceinture maintien dos": 81423
+        },
+        "cost": 91.4705590903759
     }
 }
 

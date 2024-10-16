@@ -5,7 +5,7 @@ import requests
 
 
 def get_keyword_recommendations_v2(access_token, client_id, profile_id, asins):
-    url = "https://advertising-api-eu.amazon.com/v2/sp/asins/suggested/keywords"
+    url = "https://advertising-api.amazon.com/v2/sp/asins/suggested/keywords"
     headers = {
         "Authorization": f"Bearer {access_token}",
         "Amazon-Advertising-API-ClientId": client_id,
@@ -28,16 +28,17 @@ def get_keyword_recommendations_v2(access_token, client_id, profile_id, asins):
         response.raise_for_status()
 
 
-profile_id = "4377063015685477"
+profile_id = "2651906346803655"
 client_id = "amzn1.application-oa2-client.8c1b204420b3431382419c27cb5e1243"
-access_token = "Atza|IwEBIMBk4SYkmoSWTe4_r4enjAXiWWkdDkkI6TLLnffOi0qTfgbu-oDv5DW3GNHNDl0hysIIvz7JCZR6lXyIRAyyJG4VW1BToiymSZiZj4InGSYG4mXwcgkPmBv3pPcrf46Je5tc0yzTt0d3OwJuvpVxn15qT_Li48fFqO9t9kccdwwYewE2ECF3h3LPgHr9q9lBjevtYJzRVnQ3k2zNtaMIV2lUOLVm-YnljP0AuZgnnCSblWP-asUuWb2GYHGnuoIjCl_kE4_ZfXHbqLw62cO1Ctkdgjm7x6pHDHpcM9HLKFdJH3aIodpwGkd4QnWpwokFTURDEfr5-2ioRYu-KHqPJznwrRUIw50Yx7OcGOcoQ1rRn5h-IsfmEHEFjG5osC2qpixtLRREo2bn7ujDGLpyX_zV5DaIGtvzYQcSUY-P_oQ_3KjKXsg6dO4YAfXPKitdUZmb5joUMICxOGJWv7qsuXBK"
-
-asins = [
-    "B0D6VT58SM"
-]
+access_token = "Atza|IwEBIGbh3Rr1mN9BqbgAu_-gnLLTrtby0VuMkfT7O7RBfl31134bPeB0aseiWlzGMVsF_vVwsRoR9vy4fDCF9sB0QR-47H7CUXC0eiCClb341JTwK9MP6tAZPPr0--ONeE8L10mdkjgenHL8gidAL-i2lPNYpsgI8aqboMUVnhuVcC39NbAQ5i8gHhdgDzvfu44ERGPakPLsNJ6KoiFV223BGfzXHZkIVL_jT4q0OGb1O-WSau3HOM-VAbGQQTBr-sx8qU25mbIL8mGpHHGsQJm0aUR1u86fls2Ckk7WtrSQNC845nzsvTNik6A4Y_efNQ9IEKST9FtkZYV5U0OQxwZBTk2mBDGd0S2vCSAJ1wa4l21nNQGinUEYkNQ84-sBJVLEwTO585W-OP6vVLKsJjOP33oqRh93gGaxkLSgdawBQ4K-hGtyXTOfErBdx6limwRRdSv4r-ByMKLfr-lS7Rbm8K6F"
+asins = ['B0D5TR7BF9']
 
 try:
     result = get_keyword_recommendations_v2(access_token, client_id, profile_id, asins)
     print(json.dumps(result, indent=4))
 except Exception as e:
     print(f'Error: {e}')
+'''
+
+
+'''
