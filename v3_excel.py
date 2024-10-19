@@ -1,1285 +1,592 @@
 import pandas as pd
 
 # 数据
-data = {
-    "code": 0,
-    "msg": "success",
-    "data": {
-        "bigwords": [
-            "flawless facial hair remover",
-            "facial hair removal for women",
-            "hair removal device",
-            "face shaver for women",
-            "flawless",
-            "hair removal",
-            "finishing touch flawless",
-            "face shaver",
-            "face hair removal for women",
-            "facial hair remover for women face"
-        ],
-        "crwords": [
-            "bikini trimmer",
-            "facial hair remover",
-            "hair remover",
-            "womens face razor peach fuzz",
-            "upper lip hair removal",
-            "womens facial hair shaver",
-            "face epilator",
-            "flawless hair remover",
-            "facial hair trimmer",
-            "depiladora facial para mujer",
-            "women facial hair remover",
-            "facial hair removal",
-            "face hair remover",
-            "plucy facial hair remover",
-            "face hair removal",
-            "hero epilator facial hair removal",
-            "face hair trimmer women",
-            "women face shaver peach fuzz",
-            "facial trimmer",
-            "ladies facial hair shaver",
-            "facial hair removal device",
-            "flawless face hair remover",
-            "plucky facial hair removal",
-            "face hair trimmer",
-            "heroepilator facial hair remover",
-            "women facial hair trimmer",
-            "upper lip hair remover",
-            "female face shaver",
-            "face hair removal device",
-            "womens facial hair remover device",
-            "lip shaver",
-            "female face shaver peach fuzz",
-            "women facial hair removal device",
-            "facial hair shaver",
-            "flawless rechargeable facial hair remover",
-            "eyebrow epilator",
-            "womens lip shaver",
-            "electric facial razor",
-            "facial hair trimmer women",
-            "face nair hair remover",
-            "finishing touch flawless facial hair remover",
-            "womens facial hair remover",
-            "finishing touch",
-            "hair remover for face woman",
-            "womens face shavers",
-            "peach fuzz remover for women face",
-            "chin hair removal for women",
-            "face trimmer for women",
-            "facial hair trimmer for women",
-            "women shavers",
-            "electric face shaver",
-            "epilators hair removal for women face",
-            "hair removal for women",
-            "hair remover for women",
-            "face epilator for women",
-            "womens facial hair removal devices",
-            "women face shaver",
-            "electric face shaver for women",
-            "women's facial hair remover",
-            "razors for women face hair",
-            "womens shavers for facial hair",
-            "facial shaver for women",
-            "womens face razor",
-            "personal shaver for women",
-            "face shaver for women facial hair",
-            "women shaver",
-            "lip hair removal for women",
-            "women's shaver",
-            "glabrousskin hair remover for face",
-            "womens razors for shaving face",
-            "women's face shaver",
-            "womens hair removal for face",
-            "womens face razors for facial hair",
-            "shaver for women face hair",
-            "womens facial razor",
-            "womens face shaver",
-            "women's shaving & hair removal products",
-            "chin hair removal permanent",
-            "mustache trimmer women",
-            "afeitadora para mujer",
-            "mustache remover women",
-            "flawless facial hair remover replacement heads",
-            "facial trimmer for women",
-            "face razors for women electric",
-            "electric hair remover for women",
-            "flawless razor",
-            "womens electric razor for face",
-            "peach fuzz remover",
-            "chin hair remover for women face",
-            "electric razors for women face",
-            "face shaver women",
-            "ladies face shaver for peach fuzz",
-            "ladies razors for facial hair",
-            "womens face shaver peach fuzz",
-            "flawless hair removal",
-            "women's facial hair shaver",
-            "painless hair removal for women",
-            "facial hair remover for women",
-            "braun facial hair removal for women",
-            "hair removal device for women",
-            "facial shaver",
-            "lip shaver for women facial hair",
-            "flawless face",
-            "ladies shaver",
-            "glamorous skin",
-            "upper lip hair removal for women",
-            "ladies shavers for facial hair",
-            "face razor for women facial hair",
-            "hair shaver for women",
-            "facial hair removal for women face",
-            "electric facial hair remover for women",
-            "ladies face shaver",
-            "women's face razor",
-            "flawless hair remover for face",
-            "woman face shaver",
-            "flawless shaver",
-            "peach fuzz remover for women",
-            "electric tweezers",
-            "electric tweezers for women facial hair",
-            "epilator for women facial hair removal",
-            "womens facial hair trimmer",
-            "flawless finishing touch",
-            "women hair removal",
-            "female facial hair remover",
-            "glabours skin hair remover for women",
-            "hair face removal for women",
-            "facial hair razor",
-            "epilator face",
-            "best facial hair remover for women",
-            "ladies facial hair remover",
-            "womens face hair remover",
-            "best face razors for women",
-            "painless hair removal",
-            "women's razors electric",
-            "best face hair remover for women",
-            "razor for women face",
-            "hair removal for face",
-            "electric face razors for women",
-            "mustache shavers for women",
-            "braun face mini hair remover",
-            "best face shaver for women",
-            "flawless razors for women",
-            "womens mustache hair remover",
-            "electric shaver for women face",
-            "womens facial razors for peach fuzz",
-            "womens mustache shaver",
-            "face trimmer for women facial hair",
-            "mini shaver for women",
-            "no no hair remover for women",
-            "women shavers for face",
-            "face hair remover for women",
-            "face razor for women",
-            "facial razors for women",
-            "electric razor for women face",
-            "women face hair removal",
-            "facial hair",
-            "hair removal tool",
-            "mustache razors for women",
-            "hair removal face",
-            "glamorous skin hair remover",
-            "woman facial hair remover",
-            "conture hair removal tool",
-            "women's face shaver for peach fuzz",
-            "womens facial shaver",
-            "hair removal device for face",
-            "gurelax facial hair removal for women",
-            "hair epilators, groomers & trimmers",
-            "electric hair remover",
-            "women facial razor",
-            "micro razors for women face",
-            "womens facial hair removal",
-            "chin hair removal",
-            "remove facial hair on women face",
-            "mustache shaver",
-            "women hair removal device",
-            "women razors for shaving face",
-            "women's facial shaver",
-            "depiladora de bigote para mujer"
-        ],
-        "broader_words": [
-            "flawless facial hair remover",
-            "facial hair removal for women",
-            "hair removal device",
-            "face shaver for women",
-            "flawless",
-            "hair removal",
-            "finishing touch flawless",
-            "face shaver",
-            "face hair removal for women",
-            "facial hair remover for women face"
-        ],
-        "negative_words": [
-            "flamingo facial hair remover"
-        ],
-        "bigwords_rank": {
-            "flawless facial hair remover": 4517,
-            "facial hair removal for women": 4858,
-            "hair removal device": 12984,
-            "face shaver for women": 13852,
-            "flawless": 20635,
-            "hair removal": 21831,
-            "finishing touch flawless": 35304,
-            "face shaver": 37663,
-            "face hair removal for women": 46841,
-            "facial hair remover for women face": 49221
-        },
-        "crwords_rank": {
-            "hair removal device": {
-                "src": [
-                    "v2",
-                    "v3"
-                ],
-                "rank": 12984
-            },
-            "flawless facial hair remover": {
-                "src": [
-                    "v2",
-                    "v3"
-                ],
-                "rank": 4517
-            },
-            "hair removal": {
-                "src": [
-                    "v2",
-                    "v3"
-                ],
-                "rank": 21831
-            },
-            "bikini trimmer": {
-                "src": [
-                    "v3"
-                ],
-                "rank": 31972
-            },
-            "face shaver": {
-                "src": [
-                    "v2",
-                    "v3"
-                ],
-                "rank": 37663
-            },
-            "facial hair remover": {
-                "src": None,
-                "rank": 66713
-            },
-            "hair remover": {
-                "src": None,
-                "rank": 58696
-            },
-            "womens face razor peach fuzz": {
-                "src": None,
-                "rank": 85791
-            },
-            "upper lip hair removal": {
-                "src": None,
-                "rank": 128014
-            },
-            "womens facial hair shaver": {
-                "src": None,
-                "rank": 135058
-            },
-            "face epilator": {
-                "src": None,
-                "rank": 138347
-            },
-            "flawless hair remover": {
-                "src": None,
-                "rank": 138347
-            },
-            "facial hair trimmer": {
-                "src": None,
-                "rank": 140057
-            },
-            "depiladora facial para mujer": {
-                "src": None,
-                "rank": 171877
-            },
-            "women facial hair remover": {
-                "src": None,
-                "rank": 202277
-            },
-            "facial hair removal": {
-                "src": None,
-                "rank": 205014
-            },
-            "face hair remover": {
-                "src": None,
-                "rank": 280413
-            },
-            "plucy facial hair remover": {
-                "src": None,
-                "rank": 364961
-            },
-            "face hair removal": {
-                "src": None,
-                "rank": 399632
-            },
-            "hero epilator facial hair removal": {
-                "src": [
-                    "v2"
-                ],
-                "rank": 426313
-            },
-            "face hair trimmer women": {
-                "src": None,
-                "rank": 441025
-            },
-            "women face shaver peach fuzz": {
-                "src": None,
-                "rank": 459849
-            },
-            "facial trimmer": {
-                "src": [
-                    "v2",
-                    "v3"
-                ],
-                "rank": 675892
-            },
-            "ladies facial hair shaver": {
-                "src": None,
-                "rank": 675892
-            },
-            "facial hair removal device": {
-                "src": None,
-                "rank": 791153
-            },
-            "flawless face hair remover": {
-                "src": None,
-                "rank": 864211
-            },
-            "plucky facial hair removal": {
-                "src": None,
-                "rank": 864211
-            },
-            "face hair trimmer": {
-                "src": None,
-                "rank": 887533
-            },
-            "heroepilator facial hair remover": {
-                "src": None,
-                "rank": 995104
-            },
-            "women facial hair trimmer": {
-                "src": None,
-                "rank": 1112736
-            },
-            "upper lip hair remover": {
-                "src": None,
-                "rank": 1151750
-            },
-            "female face shaver": {
-                "src": None,
-                "rank": 1237887
-            },
-            "face hair removal device": {
-                "src": None,
-                "rank": 1311011
-            },
-            "womens facial hair remover device": {
-                "src": None,
-                "rank": 1285581
-            },
-            "lip shaver": {
-                "src": [
-                    "v2",
-                    "v3"
-                ],
-                "rank": 1520933
-            },
-            "female face shaver peach fuzz": {
-                "src": [
-                    "v2"
-                ],
-                "rank": 1632429
-            },
-            "women facial hair removal device": {
-                "src": [
-                    "v2"
-                ],
-                "rank": 1632429
-            },
-            "facial hair shaver": {
-                "src": [
-                    "v2"
-                ],
-                "rank": 1673056
-            },
-            "flawless rechargeable facial hair remover": {
-                "src": [
-                    "v2",
-                    "v3"
-                ],
-                "rank": 1715421
-            },
-            "eyebrow epilator": {
-                "src": [
-                    "v2"
-                ],
-                "rank": 2024633
-            },
-            "womens lip shaver": {
-                "src": [
-                    "v2",
-                    "v3"
-                ],
-                "rank": 2152601
-            },
-            "electric facial razor": {
-                "src": [
-                    "v2"
-                ],
-                "rank": 2221966
-            },
-            "facial hair trimmer women": {
-                "src": [
-                    "v3"
-                ],
-                "rank": 2221966
-            },
-            "flamingo facial hair remover": {
-                "src": [
-                    "v2"
-                ],
-                "rank": 2295805
-            },
-            "face nair hair remover": {
-                "src": [
-                    "v2"
-                ],
-                "rank": 2374659
-            },
-            "finishing touch flawless facial hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 53680
-            },
-            "womens facial hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 69840
-            },
-            "finishing touch": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 82636
-            },
-            "hair remover for face woman": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 100780
-            },
-            "womens face shavers": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 121847
-            },
-            "peach fuzz remover for women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 126652
-            },
-            "chin hair removal for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 154692
-            },
-            "face trimmer for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 167988
-            },
-            "facial hair trimmer for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 173872
-            },
-            "women shavers": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 206365
-            },
-            "electric face shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 226169
-            },
-            "epilators hair removal for women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 229565
-            },
-            "hair removal for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 231290
-            },
-            "hair remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 237514
-            },
-            "face epilator for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 241100
-            },
-            "womens facial hair removal devices": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 255004
-            },
-            "women face shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 264788
-            },
-            "electric face shaver for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 271832
-            },
-            "women's facial hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 271832
-            },
-            "razors for women face hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 276680
-            },
-            "womens shavers for facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 276680
-            },
-            "facial shaver for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 277875
-            },
-            "womens face razor": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 282923
-            },
-            "personal shaver for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 295050
-            },
-            "face shaver for women facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 299230
-            },
-            "women shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 305050
-            },
-            "lip hair removal for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 305050
-            },
-            "women's shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 322131
-            },
-            "glabrousskin hair remover for face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 323800
-            },
-            "womens razors for shaving face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 327246
-            },
-            "women's face shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 330706
-            },
-            "womens hair removal for face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 352648
-            },
-            "womens face razors for facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 369205
-            },
-            "shaver for women face hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 387509
-            },
-            "womens facial razor": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 402171
-            },
-            "womens face shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 407286
-            },
-            "women's shaving & hair removal products": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 412614
-            },
-            "chin hair removal permanent": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 415264
-            },
-            "mustache trimmer women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 417993
-            },
-            "afeitadora para mujer": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 423506
-            },
-            "mustache remover women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 435059
-            },
-            "flawless facial hair remover replacement heads": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 453431
-            },
-            "facial trimmer for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 473036
-            },
-            "face razors for women electric": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 502304
-            },
-            "electric hair remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 510243
-            },
-            "flawless razor": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 522774
-            },
-            "womens electric razor for face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 531479
-            },
-            "peach fuzz remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 535925
-            },
-            "chin hair remover for women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 544912
-            },
-            "electric razors for women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 554371
-            },
-            "face shaver women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 589722
-            },
-            "ladies face shaver for peach fuzz": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 600517
-            },
-            "ladies razors for facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 606119
-            },
-            "womens face shaver peach fuzz": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 611855
-            },
-            "flawless hair removal": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 623612
-            },
-            "women's facial hair shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 629853
-            },
-            "painless hair removal for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 636131
-            },
-            "facial hair remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 668965
-            },
-            "braun facial hair removal for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 675892
-            },
-            "hair removal device for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 675892
-            },
-            "facial shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 690305
-            },
-            "lip shaver for women facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 705315
-            },
-            "flawless face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 705315
-            },
-            "ladies shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 713245
-            },
-            "glamorous skin": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 721280
-            },
-            "upper lip hair removal for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 729306
-            },
-            "ladies shavers for facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 772610
-            },
-            "face razor for women facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 772610
-            },
-            "hair shaver for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 781879
-            },
-            "facial hair removal for women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 781879
-            },
-            "electric facial hair remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 791153
-            },
-            "ladies face shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 791153
-            },
-            "women's face razor": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 810764
-            },
-            "flawless hair remover for face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 821149
-            },
-            "woman face shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 821149
-            },
-            "flawless shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 831436
-            },
-            "peach fuzz remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 831436
-            },
-            "electric tweezers": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 831436
-            },
-            "electric tweezers for women facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 831436
-            },
-            "epilator for women facial hair removal": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 831436
-            },
-            "womens facial hair trimmer": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 831436
-            },
-            "flawless finishing touch": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 864211
-            },
-            "women hair removal": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 864211
-            },
-            "female facial hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 864211
-            },
-            "glabours skin hair remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 864211
-            },
-            "hair face removal for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 875628
-            },
-            "facial hair razor": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 899706
-            },
-            "epilator face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 912286
-            },
-            "best facial hair remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 925162
-            },
-            "ladies facial hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 925162
-            },
-            "womens face hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 925162
-            },
-            "best face razors for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 938500
-            },
-            "painless hair removal": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 938500
-            },
-            "women's razors electric": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 938500
-            },
-            "best face hair remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 951965
-            },
-            "razor for women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 951965
-            },
-            "hair removal for face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 965759
-            },
-            "electric face razors for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 965759
-            },
-            "mustache shavers for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 980129
-            },
-            "braun face mini hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 995104
-            },
-            "best face shaver for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1026064
-            },
-            "flawless razors for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1026064
-            },
-            "womens mustache hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1042132
-            },
-            "electric shaver for women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1059020
-            },
-            "womens facial razors for peach fuzz": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1059020
-            },
-            "womens mustache shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1059020
-            },
-            "face trimmer for women facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1076322
-            },
-            "mini shaver for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1094316
-            },
-            "no no hair remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1094316
-            },
-            "women shavers for face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1131870
-            },
-            "face hair remover for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1172379
-            },
-            "face razor for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1172379
-            },
-            "facial razors for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1172379
-            },
-            "electric razor for women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1237887
-            },
-            "women face hair removal": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1237887
-            },
-            "facial hair": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1237887
-            },
-            "hair removal tool": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1261277
-            },
-            "mustache razors for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1311011
-            },
-            "hair removal face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1311011
-            },
-            "glamorous skin hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1337327
-            },
-            "woman facial hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1364851
-            },
-            "conture hair removal tool": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1364851
-            },
-            "women's face shaver for peach fuzz": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1364851
-            },
-            "womens facial shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1364851
-            },
-            "hair removal device for face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1364851
-            },
-            "gurelax facial hair removal for women": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1364851
-            },
-            "hair epilators, groomers & trimmers": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1393520
-            },
-            "electric hair remover": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1393520
-            },
-            "women facial razor": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1393520
-            },
-            "micro razors for women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1423306
-            },
-            "womens facial hair removal": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1423306
-            },
-            "chin hair removal": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1423306
-            },
-            "remove facial hair on women face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1454271
-            },
-            "mustache shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1486915
-            },
-            "women hair removal device": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1486915
-            },
-            "women razors for shaving face": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1486915
-            },
-            "women's facial shaver": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1486915
-            },
-            "depiladora de bigote para mujer": {
-                "src": [
-                    "145w"
-                ],
-                "rank": 1486915
-            }
-        }
-    }
-}
+data = {'data': {
+        'bigwords': ['travel', 'edc', 'anker qi2', 'charmast portable charger', 'iphone accessories'],
+        'crwords': ['power bank', 'portable charger power bank', 'power bank fast charging', 'portable power bank',
+                    'portable phone charger', 'portable phone charger iphone', 'charging bank',
+                    'portable battery charger', 'iphone portable charger fast charging', 'powerbank fast charging',
+                    'travel charger', 'usb c power bank', 'mini power bank', 'travel power bank', 'phone power bank',
+                    'charger portable', '10000mah power bank', 'slim power bank', 'external charger', 'usbc power bank',
+                    'powerbank iphone', 'mobile charger power bank', 'portable fast charger power bank',
+                    'battery power bank', 'phone power bank iphone', 'power charger', 'power bank iphone 15',
+                    'power bank with wall plug', 'compact power bank', 'fast charge power bank', 'pd power bank',
+                    'thin power bank', 'lightweight power bank', 'phone charging bank', 'portable charger wall plug',
+                    'charger power bank', 'portable usb charger power bank', 'power bank wall plug',
+                    'power bank with plug', 'portable powerbank', 'portable iphone charger power bank',
+                    'power bank with ac plug', 'wall charger power bank', 'powerbank charger',
+                    'battery bank with cables', 'power bank with lightning cable', 'small portable charger',
+                    'mini portable charger', 'tech', 'small power bank', 'travel items', '充电宝', 'travel gadgets',
+                    'veektomx portable charger', 'fast chargers', 'rush charger 3 in 1 portable charger iphone',
+                    'cargadores portátiles para celular', '10000 mah power bank', 'power bank 10000mah',
+                    'portable charger small', 'power bank charger', 'small battery pack',
+                    'veger portable charger for iphone', 'power bank small', '140w power bank', 'travel gadgets 2024',
+                    'power bank 100w', 'portable charger lightning', 'best power bank',
+                    'iniu portable charger, slimmest 10000mah 5v/3a power bank', 'portable power bank for iphone',
+                    'fast portable charger iphone', 'power bank for iphone 11', 'compact portable charger',
+                    'plug in power bank', 'lightweight portable charger', 'plug in portable charger',
+                    'mini power bank for iphone', 'best portable charger for iphone 11', 'charging pack',
+                    'veektomx mini power bank 10000mah', 'travel battery charger', 'power bank mini',
+                    'small phone charger portable', 'small portable charger power bank',
+                    'iphone 11 portable charger fast charging', 'smallest power bank', 'portable charger 10000mah',
+                    'usb c battery', 'portable charger plug in wall', 'lightning portable charger',
+                    'power bank portable', 'small portable phone charger', 'small portable power bank',
+                    'power bank for iphone 14', 'small battery bank', 'mini charger', 'small phone charger',
+                    'external battery charger', 'mini charger power bank', 'iphone 13 power bank', 'mini battery pack',
+                    'portable charger lightweight', 'portable charger slim',
+                    'iniu portable charger, slimmest 10000mah 5v/3a power bank, usb c in&out high-speed charging battery ',
+                    'carregador portatil iphone', 'power bank 10000', 'small charger portable', 'veger',
+                    'power bank compact', 'mini phone charger', 'iphone 12 power bank', 'necessities',
+                    'best lightweight portable charger', 'portable phone charger iphone 11', '10,000 mah power bank',
+                    'super fast portable charger', 'portable charger plug in', 'power bank pd',
+                    'thin portable charger power bank', 'best portable charger for iphone 14', 'power bank plug in',
+                    'portable charger for samsung s23', 'power bank lightning', 'iphone power bank fast charge',
+                    'battery pack small'],
+        'broader_words': ['travel', 'edc', 'anker qi2', 'charmast portable charger', 'iphone accessories', 'power bank',
+                          'portable charger power bank', 'portable phone charger', 'power bank fast charging',
+                          'portable power bank'],
+        'negative_words': ['power bank 20000mah', 'anker powerbank', 'laptop power bank', 'anker 737',
+                           'anker nano power bank', 'anker battery', 'portable laptop charger', 'anker mag go',
+                           'limitless power bank', 'anker 737 power bank', 'power bank for laptop',
+                           'veger portable charger', 'qi2 magsafe charger', 'anker maggo power bank',
+                           'laptop portable charger', 'anker battery bank', 'anker 747', 'anker power', 'qi2',
+                           'laptop battery power bank', 'inui portable chargers', 'charmast',
+                           'yiisonger magnetic wireless power bank', 'limitless charger power bank',
+                           'anker prime 27,650mah power bank 250w', 'anker maggo power bank 10k',
+                           'anker charger portable', 'anker power bank charger', 'portable charger 2 pack',
+                           'anker maggo qi2', 'anker ganprime', 'anker lightning charger', '737 power bank anker',
+                           'anker portable charger huge power', 'anker 733', 'anker laptop power bank',
+                           'limitless wireless charger', 'anker 733 power bank', 'magnetic wireless power bank',
+                           'iniu b61', 'steam deck power bank', 'anker mini power bank', 'anker phone chargers',
+                           'anker power bank wireless', 'portable power bank for laptop', 'anker power bank qi2',
+                           'laptop charger power bank', 'qi2 power bank', '27000mah power bank',
+                           'laptop external battery', 'yiisonger', 'anker mag go power bank', 'anker power banks',
+                           'macbook power bank', 'anker power bank lightning cable', 'anker power bank lightning',
+                           'anker prime power bank (9.6k, 65w, fusion)', 'anker mag', 'anker maggo power bank (10k)',
+                           'portable charger for macbook pro', 'anker 747 power bank', 'portable laptop powerbank',
+                           '100wh power bank', 'anker 2 in 1 charger', 'anker iphone power bank', '100 watt power bank',
+                           'anker 733 ganprime powercore 65w battery bank', 'anker prime 27,650mah power bank (250w)',
+                           'anker mago', 'anker mago power bank', 'anker power bank wall charger',
+                           'macbook portable charger', 'portable charger laptop', 'portable power bank anker',
+                           'anker power bank 737', 'bateria anker', 'battery pack for laptop',
+                           'anker portable charger iphone', 'portable macbook charger', 'powerbank for laptop',
+                           'anker lightning power bank', 'anker power bank laptop', 'anker prime 27,650mah power bank',
+                           'mag go anker', 'portable phone charger anker', 'anker phone charger portable',
+                           'anker qi2 power bank', 'limitless power bank charger', 'keoll power bank',
+                           'anker 250w power bank', 'charmast charger', 'iphone wireless charger portable',
+                           'macbook pro external battery', 'laptop powerbank', 'nano power bank',
+                           'qi2 magsafe battery pack', 'portable charger for laptop computer',
+                           'external laptop battery', 'anker a1654', 'anker power bank for iphone',
+                           'anker power bank iphone', 'asperx 2-pack 10000mah usb c output portable charger',
+                           'anker prime 27650', 'anker wall charger power bank', 'anker portable phone charger',
+                           'anker power bank iphone 11', 'verger portable charger iphone', 'maggo power bank',
+                           'iphone anker charger', 'charmcaster portable charger', 'anker 27650mah power bank',
+                           'portable battery anker', 'anker maggo qi 2', '100w battery bank', 'power bank 100wh',
+                           'mag phone charger', 'iniu b61 power bank', 'anker power bank maggo',
+                           'portable charger power bank 2 pack', 'anker nano power bank lightning',
+                           'anker plug in power bank', 'anker portable charger iphone 13', 'veger power bank',
+                           'portable battery for laptop', 'phone charger anker', 'macbook air portable charger',
+                           'anker power bank iphone 12', 'anker power bank with plug'],
+        'bigwords_rank': {'travel': 3921, 'edc': 14164, 'anker qi2': 34501, 'charmast portable charger': 40884,
+                          'iphone accessories': 44759}, 'crwords_rank': {'power bank': {'src': ['v3'], 'rank': 259},
+                                                                         'portable charger power bank': {
+                                                                             'src': ['v2', 'v3'], 'rank': 2464},
+                                                                         'power bank fast charging': {
+                                                                             'src': ['v2', 'v3'], 'rank': 17101},
+                                                                         'portable power bank': {'src': ['v2', 'v3'],
+                                                                                                 'rank': 18476},
+                                                                         'portable phone charger': {'src': ['v3'],
+                                                                                                    'rank': 11695},
+                                                                         'portable phone charger iphone': {
+                                                                             'src': ['v3'], 'rank': 28608},
+                                                                         'charging bank': {'src': ['v2', 'v3'],
+                                                                                           'rank': 46199},
+                                                                         'portable battery charger': {'src': ['v3'],
+                                                                                                      'rank': 36138},
+                                                                         'iphone portable charger fast charging': {
+                                                                             'src': ['v2', 'v3'], 'rank': 50404},
+                                                                         'powerbank fast charging': {
+                                                                             'src': ['v2', 'v3'], 'rank': 70799},
+                                                                         'travel charger': {'src': ['v3'],
+                                                                                            'rank': 63657},
+                                                                         'usb c power bank': {'src': ['v3'],
+                                                                                              'rank': 92727},
+                                                                         'power bank 20000mah': {'src': ['v3'],
+                                                                                                 'rank': 99671},
+                                                                         'mini power bank': {'src': None,
+                                                                                             'rank': 88068},
+                                                                         'anker powerbank': {'src': None,
+                                                                                             'rank': 108836},
+                                                                         'travel power bank': {'src': ['v2', 'v3'],
+                                                                                               'rank': 123377},
+                                                                         'phone power bank': {'src': ['v2', 'v3'],
+                                                                                              'rank': 124455},
+                                                                         'charger portable': {'src': ['v3'],
+                                                                                              'rank': 115130},
+                                                                         '10000mah power bank': {'src': None,
+                                                                                                 'rank': 152365},
+                                                                         'slim power bank': {'src': ['v3'],
+                                                                                             'rank': 177488},
+                                                                         'external charger': {'src': None,
+                                                                                              'rank': 198307},
+                                                                         'usbc power bank': {'src': ['v3'],
+                                                                                             'rank': 236601},
+                                                                         'powerbank iphone': {'src': ['v3'],
+                                                                                              'rank': 252856},
+                                                                         'mobile charger power bank': {
+                                                                             'src': ['v2', 'v3'], 'rank': 286904},
+                                                                         'portable fast charger power bank': {
+                                                                             'src': ['v2'], 'rank': 302147},
+                                                                         'battery power bank': {'src': ['v2', 'v3'],
+                                                                                                'rank': 311128},
+                                                                         'phone power bank iphone': {'src': ['v2'],
+                                                                                                     'rank': 420736},
+                                                                         'power charger': {'src': ['v3'],
+                                                                                           'rank': 438043},
+                                                                         'power bank iphone 15': {'src': ['v2'],
+                                                                                                  'rank': 450310},
+                                                                         'power bank with wall plug': {'src': None,
+                                                                                                       'rank': 483669},
+                                                                         'compact power bank': {'src': None,
+                                                                                                'rank': 506268},
+                                                                         'fast charge power bank': {'src': ['v2', 'v3'],
+                                                                                                    'rank': 559159},
+                                                                         'pd power bank': {'src': ['v3'],
+                                                                                           'rank': 584469},
+                                                                         'thin power bank': {'src': None,
+                                                                                             'rank': 606119},
+                                                                         'lightweight power bank': {'src': None,
+                                                                                                    'rank': 690305},
+                                                                         'phone charging bank': {'src': ['v2'],
+                                                                                                 'rank': 721280},
+                                                                         'portable charger wall plug': {'src': ['v3'],
+                                                                                                        'rank': 713245},
+                                                                         'charger power bank': {'src': ['v2', 'v3'],
+                                                                                                'rank': 746238},
+                                                                         'portable usb charger power bank': {
+                                                                             'src': ['v2'], 'rank': 1151750},
+                                                                         'power bank wall plug': {'src': ['v2', 'v3'],
+                                                                                                  'rank': 1172379},
+                                                                         'power bank with plug': {'src': None,
+                                                                                                  'rank': 1215200},
+                                                                         'portable powerbank': {'src': ['v3'],
+                                                                                                'rank': 1454271},
+                                                                         'portable iphone charger power bank': {
+                                                                             'src': ['v3'], 'rank': 1760643},
+                                                                         'power bank with ac plug': {'src': ['v2'],
+                                                                                                     'rank': 1965803},
+                                                                         'wall charger power bank': {'src': ['v2'],
+                                                                                                     'rank': 1965803},
+                                                                         'powerbank charger': {'src': ['v2'],
+                                                                                               'rank': 2152601},
+                                                                         'battery bank with cables': {'src': ['v2'],
+                                                                                                      'rank': 2295805},
+                                                                         'power bank with lightning cable': {
+                                                                             'src': ['v2'], 'rank': 2295805},
+                                                                         'small portable charger': {'src': ['145w'],
+                                                                                                    'rank': 55609},
+                                                                         'laptop power bank': {'src': ['145w'],
+                                                                                               'rank': 57087},
+                                                                         'mini portable charger': {'src': ['145w'],
+                                                                                                   'rank': 58176},
+                                                                         'anker 737': {'src': ['145w'], 'rank': 62203},
+                                                                         'anker nano power bank': {'src': ['145w'],
+                                                                                                   'rank': 68207},
+                                                                         'tech': {'src': ['145w'], 'rank': 69127},
+                                                                         'anker battery': {'src': ['145w'],
+                                                                                           'rank': 70231},
+                                                                         'portable laptop charger': {'src': ['145w'],
+                                                                                                     'rank': 74822},
+                                                                         'anker mag go': {'src': ['145w'],
+                                                                                          'rank': 76772},
+                                                                         'limitless power bank': {'src': ['145w'],
+                                                                                                  'rank': 87654},
+                                                                         'small power bank': {'src': ['145w'],
+                                                                                              'rank': 89033},
+                                                                         'anker 737 power bank': {'src': ['145w'],
+                                                                                                  'rank': 92162},
+                                                                         'power bank for laptop': {'src': ['145w'],
+                                                                                                   'rank': 120309},
+                                                                         'veger portable charger': {'src': ['145w'],
+                                                                                                    'rank': 129795},
+                                                                         'qi2 magsafe charger': {'src': ['145w'],
+                                                                                                 'rank': 131215},
+                                                                         'travel items': {'src': ['145w'],
+                                                                                          'rank': 131500},
+                                                                         'anker maggo power bank': {'src': ['145w'],
+                                                                                                    'rank': 136391},
+                                                                         'laptop portable charger': {'src': ['145w'],
+                                                                                                     'rank': 138019},
+                                                                         'anker battery bank': {'src': ['145w'],
+                                                                                                'rank': 141767},
+                                                                         'anker 747': {'src': ['145w'], 'rank': 146371},
+                                                                         '充电宝': {'src': ['145w'], 'rank': 157535},
+                                                                         'anker power': {'src': ['145w'],
+                                                                                         'rank': 163961},
+                                                                         'qi2': {'src': ['145w'], 'rank': 170822},
+                                                                         'travel gadgets': {'src': ['145w'],
+                                                                                            'rank': 176990},
+                                                                         'laptop battery power bank': {'src': ['145w'],
+                                                                                                       'rank': 180132},
+                                                                         'inui portable chargers': {'src': ['145w'],
+                                                                                                    'rank': 186770},
+                                                                         'charmast': {'src': ['145w'], 'rank': 207742},
+                                                                         'veektomx portable charger': {'src': ['145w'],
+                                                                                                       'rank': 210577},
+                                                                         'fast chargers': {'src': ['145w'],
+                                                                                           'rank': 221312},
+                                                                         'yiisonger magnetic wireless power bank': {
+                                                                             'src': ['145w'], 'rank': 257096},
+                                                                         'limitless charger power bank': {
+                                                                             'src': ['145w'], 'rank': 260265},
+                                                                         'anker prime 27,650mah power bank 250w': {
+                                                                             'src': ['145w'], 'rank': 267130},
+                                                                         'rush charger 3 in 1 portable charger iphone': {
+                                                                             'src': ['145w'], 'rank': 270665},
+                                                                         'anker maggo power bank 10k': {'src': ['145w'],
+                                                                                                        'rank': 273001},
+                                                                         'cargadores portátiles para celular': {
+                                                                             'src': ['145w'], 'rank': 277875},
+                                                                         '10000 mah power bank': {'src': ['145w'],
+                                                                                                  'rank': 282923},
+                                                                         'power bank 10000mah': {'src': ['145w'],
+                                                                                                 'rank': 290960},
+                                                                         'portable charger small': {'src': ['145w'],
+                                                                                                    'rank': 300682},
+                                                                         'anker charger portable': {'src': ['145w'],
+                                                                                                    'rank': 317369},
+                                                                         'power bank charger': {'src': ['145w'],
+                                                                                                'rank': 327246},
+                                                                         'anker power bank charger': {'src': ['145w'],
+                                                                                                      'rank': 330706},
+                                                                         'portable charger 2 pack': {'src': ['145w'],
+                                                                                                     'rank': 339529},
+                                                                         'small battery pack': {'src': ['145w'],
+                                                                                                'rank': 356688},
+                                                                         'anker maggo qi2': {'src': ['145w'],
+                                                                                             'rank': 362913},
+                                                                         'anker ganprime': {'src': ['145w'],
+                                                                                            'rank': 382813},
+                                                                         'anker lightning charger': {'src': ['145w'],
+                                                                                                     'rank': 394655},
+                                                                         'veger portable charger for iphone': {
+                                                                             'src': ['145w'], 'rank': 394655},
+                                                                         '737 power bank anker': {'src': ['145w'],
+                                                                                                  'rank': 404691},
+                                                                         'power bank small': {'src': ['145w'],
+                                                                                              'rank': 412614},
+                                                                         'anker portable charger huge power': {
+                                                                             'src': ['145w'], 'rank': 412614},
+                                                                         '140w power bank': {'src': ['145w'],
+                                                                                             'rank': 415264},
+                                                                         'travel gadgets 2024': {'src': ['145w'],
+                                                                                                 'rank': 415264},
+                                                                         'anker 733': {'src': ['145w'], 'rank': 420736},
+                                                                         'power bank 100w': {'src': ['145w'],
+                                                                                             'rank': 438043},
+                                                                         'anker laptop power bank': {'src': ['145w'],
+                                                                                                     'rank': 438043},
+                                                                         'portable charger lightning': {'src': ['145w'],
+                                                                                                        'rank': 453431},
+                                                                         'limitless wireless charger': {'src': ['145w'],
+                                                                                                        'rank': 469619},
+                                                                         'best power bank': {'src': ['145w'],
+                                                                                             'rank': 469619},
+                                                                         'anker 733 power bank': {'src': ['145w'],
+                                                                                                  'rank': 476569},
+                                                                         'magnetic wireless power bank': {
+                                                                             'src': ['145w'], 'rank': 487249},
+                                                                         'iniu b61': {'src': ['145w'], 'rank': 487249},
+                                                                         'iniu portable charger, slimmest 10000mah 5v/3a power bank': {
+                                                                             'src': ['145w'], 'rank': 506268},
+                                                                         'portable power bank for iphone': {
+                                                                             'src': ['145w'], 'rank': 510243},
+                                                                         'fast portable charger iphone': {
+                                                                             'src': ['145w'], 'rank': 518533},
+                                                                         'power bank for iphone 11': {'src': ['145w'],
+                                                                                                      'rank': 518533},
+                                                                         'compact portable charger': {'src': ['145w'],
+                                                                                                      'rank': 531479},
+                                                                         'plug in power bank': {'src': ['145w'],
+                                                                                                'rank': 540370},
+                                                                         'steam deck power bank': {'src': ['145w'],
+                                                                                                   'rank': 544912},
+                                                                         'lightweight portable charger': {
+                                                                             'src': ['145w'], 'rank': 549674},
+                                                                         'anker mini power bank': {'src': ['145w'],
+                                                                                                   'rank': 559159},
+                                                                         'plug in portable charger': {'src': ['145w'],
+                                                                                                      'rank': 574040},
+                                                                         'anker phone chargers': {'src': ['145w'],
+                                                                                                  'rank': 595062},
+                                                                         'mini power bank for iphone': {'src': ['145w'],
+                                                                                                        'rank': 611855},
+                                                                         'anker power bank wireless': {'src': ['145w'],
+                                                                                                       'rank': 611855},
+                                                                         'portable power bank for laptop': {
+                                                                             'src': ['145w'], 'rank': 623612},
+                                                                         'anker power bank qi2': {'src': ['145w'],
+                                                                                                  'rank': 636131},
+                                                                         'laptop charger power bank': {'src': ['145w'],
+                                                                                                       'rank': 642496},
+                                                                         'qi2 power bank': {'src': ['145w'],
+                                                                                            'rank': 642496},
+                                                                         'best portable charger for iphone 11': {
+                                                                             'src': ['145w'], 'rank': 642496},
+                                                                         'charging pack': {'src': ['145w'],
+                                                                                           'rank': 642496},
+                                                                         '27000mah power bank': {'src': ['145w'],
+                                                                                                 'rank': 655333},
+                                                                         'laptop external battery': {'src': ['145w'],
+                                                                                                     'rank': 661997},
+                                                                         'yiisonger': {'src': ['145w'], 'rank': 675892},
+                                                                         'anker mag go power bank': {'src': ['145w'],
+                                                                                                     'rank': 675892},
+                                                                         'anker power banks': {'src': ['145w'],
+                                                                                               'rank': 675892},
+                                                                         'veektomx mini power bank 10000mah': {
+                                                                             'src': ['145w'], 'rank': 675892},
+                                                                         'travel battery charger': {'src': ['145w'],
+                                                                                                    'rank': 697693},
+                                                                         'power bank mini': {'src': ['145w'],
+                                                                                             'rank': 697693},
+                                                                         'macbook power bank': {'src': ['145w'],
+                                                                                                'rank': 697693},
+                                                                         'anker power bank lightning cable': {
+                                                                             'src': ['145w'], 'rank': 729306},
+                                                                         'anker power bank lightning': {'src': ['145w'],
+                                                                                                        'rank': 737640},
+                                                                         'anker prime power bank (9.6k, 65w, fusion)': {
+                                                                             'src': ['145w'], 'rank': 737640},
+                                                                         'small phone charger portable': {
+                                                                             'src': ['145w'], 'rank': 746238},
+                                                                         'anker mag': {'src': ['145w'], 'rank': 746238},
+                                                                         'anker maggo power bank (10k)': {
+                                                                             'src': ['145w'], 'rank': 746238},
+                                                                         'portable charger for macbook pro': {
+                                                                             'src': ['145w'], 'rank': 791153},
+                                                                         'anker 747 power bank': {'src': ['145w'],
+                                                                                                  'rank': 791153},
+                                                                         'small portable charger power bank': {
+                                                                             'src': ['145w'], 'rank': 800966},
+                                                                         'portable laptop powerbank': {'src': ['145w'],
+                                                                                                       'rank': 800966},
+                                                                         '100wh power bank': {'src': ['145w'],
+                                                                                              'rank': 810764},
+                                                                         'anker 2 in 1 charger': {'src': ['145w'],
+                                                                                                  'rank': 810764},
+                                                                         'anker iphone power bank': {'src': ['145w'],
+                                                                                                     'rank': 810764},
+                                                                         'iphone 11 portable charger fast charging': {
+                                                                             'src': ['145w'], 'rank': 810764},
+                                                                         'smallest power bank': {'src': ['145w'],
+                                                                                                 'rank': 821149},
+                                                                         'portable charger 10000mah': {'src': ['145w'],
+                                                                                                       'rank': 831436},
+                                                                         '100 watt power bank': {'src': ['145w'],
+                                                                                                 'rank': 831436},
+                                                                         'usb c battery': {'src': ['145w'],
+                                                                                           'rank': 842048},
+                                                                         'anker 733 ganprime powercore 65w battery bank': {
+                                                                             'src': ['145w'], 'rank': 842048},
+                                                                         'anker prime 27,650mah power bank (250w)': {
+                                                                             'src': ['145w'], 'rank': 842048},
+                                                                         'portable charger plug in wall': {
+                                                                             'src': ['145w'], 'rank': 864211},
+                                                                         'anker mago': {'src': ['145w'],
+                                                                                        'rank': 864211},
+                                                                         'lightning portable charger': {'src': ['145w'],
+                                                                                                        'rank': 875628},
+                                                                         'anker mago power bank': {'src': ['145w'],
+                                                                                                   'rank': 887533},
+                                                                         'anker power bank wall charger': {
+                                                                             'src': ['145w'], 'rank': 887533},
+                                                                         'power bank portable': {'src': ['145w'],
+                                                                                                 'rank': 899706},
+                                                                         'small portable phone charger': {
+                                                                             'src': ['145w'], 'rank': 925162},
+                                                                         'small portable power bank': {'src': ['145w'],
+                                                                                                       'rank': 925162},
+                                                                         'macbook portable charger': {'src': ['145w'],
+                                                                                                      'rank': 925162},
+                                                                         'portable charger laptop': {'src': ['145w'],
+                                                                                                     'rank': 938500},
+                                                                         'portable power bank anker': {'src': ['145w'],
+                                                                                                       'rank': 951965},
+                                                                         'power bank for iphone 14': {'src': ['145w'],
+                                                                                                      'rank': 965759},
+                                                                         'anker power bank 737': {'src': ['145w'],
+                                                                                                  'rank': 980129},
+                                                                         'small battery bank': {'src': ['145w'],
+                                                                                                'rank': 980129},
+                                                                         'mini charger': {'src': ['145w'],
+                                                                                          'rank': 980129},
+                                                                         'small phone charger': {'src': ['145w'],
+                                                                                                 'rank': 995104},
+                                                                         'bateria anker': {'src': ['145w'],
+                                                                                           'rank': 1010303},
+                                                                         'external battery charger': {'src': ['145w'],
+                                                                                                      'rank': 1010303},
+                                                                         'mini charger power bank': {'src': ['145w'],
+                                                                                                     'rank': 1010303},
+                                                                         'battery pack for laptop': {'src': ['145w'],
+                                                                                                     'rank': 1026064},
+                                                                         'iphone 13 power bank': {'src': ['145w'],
+                                                                                                  'rank': 1026064},
+                                                                         'anker portable charger iphone': {
+                                                                             'src': ['145w'], 'rank': 1042132},
+                                                                         'portable macbook charger': {'src': ['145w'],
+                                                                                                      'rank': 1042132},
+                                                                         'mini battery pack': {'src': ['145w'],
+                                                                                               'rank': 1042132},
+                                                                         'portable charger lightweight': {
+                                                                             'src': ['145w'], 'rank': 1042132},
+                                                                         'portable charger slim': {'src': ['145w'],
+                                                                                                   'rank': 1042132},
+                                                                         'powerbank for laptop': {'src': ['145w'],
+                                                                                                  'rank': 1059020},
+                                                                         'iniu portable charger, slimmest 10000mah 5v/3a power bank, usb c in&out high-speed charging battery ': {
+                                                                             'src': ['145w'], 'rank': 1059020},
+                                                                         'anker lightning power bank': {'src': ['145w'],
+                                                                                                        'rank': 1076322},
+                                                                         'carregador portatil iphone': {'src': ['145w'],
+                                                                                                        'rank': 1094316},
+                                                                         'power bank 10000': {'src': ['145w'],
+                                                                                              'rank': 1094316},
+                                                                         'anker power bank laptop': {'src': ['145w'],
+                                                                                                     'rank': 1112736},
+                                                                         'anker prime 27,650mah power bank': {
+                                                                             'src': ['145w'], 'rank': 1112736},
+                                                                         'mag go anker': {'src': ['145w'],
+                                                                                          'rank': 1112736},
+                                                                         'portable phone charger anker': {
+                                                                             'src': ['145w'], 'rank': 1131870},
+                                                                         'small charger portable': {'src': ['145w'],
+                                                                                                    'rank': 1131870},
+                                                                         'anker phone charger portable': {
+                                                                             'src': ['145w'], 'rank': 1151750},
+                                                                         'anker qi2 power bank': {'src': ['145w'],
+                                                                                                  'rank': 1151750},
+                                                                         'veger': {'src': ['145w'], 'rank': 1151750},
+                                                                         'power bank compact': {'src': ['145w'],
+                                                                                                'rank': 1151750},
+                                                                         'limitless power bank charger': {
+                                                                             'src': ['145w'], 'rank': 1151750},
+                                                                         'keoll power bank': {'src': ['145w'],
+                                                                                              'rank': 1172379},
+                                                                         'anker 250w power bank': {'src': ['145w'],
+                                                                                                   'rank': 1172379},
+                                                                         'charmast charger': {'src': ['145w'],
+                                                                                              'rank': 1172379},
+                                                                         'mini phone charger': {'src': ['145w'],
+                                                                                                'rank': 1193496},
+                                                                         'iphone 12 power bank': {'src': ['145w'],
+                                                                                                  'rank': 1193496},
+                                                                         'necessities': {'src': ['145w'],
+                                                                                         'rank': 1193496},
+                                                                         'iphone wireless charger portable': {
+                                                                             'src': ['145w'], 'rank': 1193496},
+                                                                         'macbook pro external battery': {
+                                                                             'src': ['145w'], 'rank': 1193496},
+                                                                         'laptop powerbank': {'src': ['145w'],
+                                                                                              'rank': 1215200},
+                                                                         'nano power bank': {'src': ['145w'],
+                                                                                             'rank': 1215200},
+                                                                         'qi2 magsafe battery pack': {'src': ['145w'],
+                                                                                                      'rank': 1215200},
+                                                                         'portable charger for laptop computer': {
+                                                                             'src': ['145w'], 'rank': 1215200},
+                                                                         'external laptop battery': {'src': ['145w'],
+                                                                                                     'rank': 1215200},
+                                                                         'anker a1654': {'src': ['145w'],
+                                                                                         'rank': 1215200},
+                                                                         'anker power bank for iphone': {
+                                                                             'src': ['145w'], 'rank': 1215200},
+                                                                         'anker power bank iphone': {'src': ['145w'],
+                                                                                                     'rank': 1237887},
+                                                                         'asperx 2-pack 10000mah usb c output portable charger': {
+                                                                             'src': ['145w'], 'rank': 1261277},
+                                                                         'anker prime 27650': {'src': ['145w'],
+                                                                                               'rank': 1261277},
+                                                                         'anker wall charger power bank': {
+                                                                             'src': ['145w'], 'rank': 1261277},
+                                                                         'anker portable phone charger': {
+                                                                             'src': ['145w'], 'rank': 1285581},
+                                                                         'anker power bank iphone 11': {'src': ['145w'],
+                                                                                                        'rank': 1285581},
+                                                                         'best lightweight portable charger': {
+                                                                             'src': ['145w'], 'rank': 1285581},
+                                                                         'portable phone charger iphone 11': {
+                                                                             'src': ['145w'], 'rank': 1285581},
+                                                                         'verger portable charger iphone': {
+                                                                             'src': ['145w'], 'rank': 1311011},
+                                                                         'maggo power bank': {'src': ['145w'],
+                                                                                              'rank': 1311011},
+                                                                         'iphone anker charger': {'src': ['145w'],
+                                                                                                  'rank': 1311011},
+                                                                         'charmcaster portable charger': {
+                                                                             'src': ['145w'], 'rank': 1311011},
+                                                                         'anker 27650mah power bank': {'src': ['145w'],
+                                                                                                       'rank': 1311011},
+                                                                         '10,000 mah power bank': {'src': ['145w'],
+                                                                                                   'rank': 1337327},
+                                                                         'super fast portable charger': {
+                                                                             'src': ['145w'], 'rank': 1337327},
+                                                                         'portable battery anker': {'src': ['145w'],
+                                                                                                    'rank': 1337327},
+                                                                         'portable charger plug in': {'src': ['145w'],
+                                                                                                      'rank': 1337327},
+                                                                         'power bank pd': {'src': ['145w'],
+                                                                                           'rank': 1364851},
+                                                                         'anker maggo qi 2': {'src': ['145w'],
+                                                                                              'rank': 1364851},
+                                                                         '100w battery bank': {'src': ['145w'],
+                                                                                               'rank': 1364851},
+                                                                         'power bank 100wh': {'src': ['145w'],
+                                                                                              'rank': 1393520},
+                                                                         'thin portable charger power bank': {
+                                                                             'src': ['145w'], 'rank': 1393520},
+                                                                         'mag phone charger': {'src': ['145w'],
+                                                                                               'rank': 1393520},
+                                                                         'iniu b61 power bank': {'src': ['145w'],
+                                                                                                 'rank': 1393520},
+                                                                         'best portable charger for iphone 14': {
+                                                                             'src': ['145w'], 'rank': 1423306},
+                                                                         'anker power bank maggo': {'src': ['145w'],
+                                                                                                    'rank': 1423306},
+                                                                         'portable charger power bank 2 pack': {
+                                                                             'src': ['145w'], 'rank': 1423306},
+                                                                         'anker nano power bank lightning': {
+                                                                             'src': ['145w'], 'rank': 1454271},
+                                                                         'anker plug in power bank': {'src': ['145w'],
+                                                                                                      'rank': 1454271},
+                                                                         'anker portable charger iphone 13': {
+                                                                             'src': ['145w'], 'rank': 1454271},
+                                                                         'power bank plug in': {'src': ['145w'],
+                                                                                                'rank': 1454271},
+                                                                         'veger power bank': {'src': ['145w'],
+                                                                                              'rank': 1454271},
+                                                                         'portable battery for laptop': {
+                                                                             'src': ['145w'], 'rank': 1454271},
+                                                                         'portable charger for samsung s23': {
+                                                                             'src': ['145w'], 'rank': 1454271},
+                                                                         'power bank lightning': {'src': ['145w'],
+                                                                                                  'rank': 1486915},
+                                                                         'phone charger anker': {'src': ['145w'],
+                                                                                                 'rank': 1486915},
+                                                                         'iphone power bank fast charge': {
+                                                                             'src': ['145w'], 'rank': 1486915},
+                                                                         'macbook air portable charger': {
+                                                                             'src': ['145w'], 'rank': 1486915},
+                                                                         'battery pack small': {'src': ['145w'],
+                                                                                                'rank': 1486915},
+                                                                         'anker power bank iphone 12': {'src': ['145w'],
+                                                                                                        'rank': 1486915},
+                                                                         'anker power bank with plug': {'src': ['145w'],
+                                                                                                        'rank': 1486915}}},
+        'middle-broader-keyword-targeting': 1.6, 'phrase-keyword-targeting': 1.6,
+        'negative-middle-broader-targeting': None, 'negative-phrase-targeting': None, 'negative-auto-a-targeting': None,
+        'negative-auto-b-targeting': None, 'product-create': 177, 'ads-conf': None}
 data = data
 # 提取bigwords_rank数据
 bigwords = []
@@ -1325,7 +632,7 @@ data = {
 # df = pd.concat([bigwords_df, crwords_df], ignore_index=True)
 #
 # # 保存到Excel
-output_file = "cs-1015.xlsx"
+output_file = "1019-B0CJB92RP4.xlsx"
 # df.to_excel(output_file, index=False)
 
 # print(f"Data saved to {output_file}")
