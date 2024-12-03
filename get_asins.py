@@ -6,7 +6,7 @@ from openpyxl import Workbook
 
 
 def get_asins(access_token, client_id, profile_id, asins, count):
-    url = "https://advertising-api-eu.amazon.com/sp/targets/products/recommendations"
+    url = "https://advertising-api.amazon.com/sp/targets/products/recommendations"
     headers = {
         'Authorization': f'Bearer {access_token}',
         'Amazon-Advertising-API-ClientId': client_id,
@@ -17,11 +17,12 @@ def get_asins(access_token, client_id, profile_id, asins, count):
     data = {
         "adAsins": asins,
         "count": count,
-        "locale": "it_IT"
+        "locale": "en_US"
     }
     response = requests.post(url, headers=headers, json=data)
     if response.status_code == 200:
         response_json = response.json()
+        print(f"Success: {response.status_code} - {response.text}")
         # return response_json
         recommended_asins = [item['recommendedAsin'] for item in response_json.get('recommendations', [])]
         return recommended_asins
@@ -30,20 +31,20 @@ def get_asins(access_token, client_id, profile_id, asins, count):
         return []
 
 
-profile_id = "1322367844724023"
+profile_id = "3338272033075265"
 client_id = "amzn1.application-oa2-client.8c1b204420b3431382419c27cb5e1243"
-access_token = "Atza|IwEBIGChn2kdUs5740ET5ZtOpZOkXdS-9KMm7kdSW6CGqujVrxrqz3E5orXZTaMt63sfFrhaEAp02foaUCjHaoHYpKEM_I4Bd2ZqJDbfxF67H7VKK5fOmXcE2APY1WZsTER5uP5cd6gk8NBgbWrP07ZUV3flnWNvxhhfIKQpxS_pwJ_MOzapOhAjMdgUrNbePtd64YPcT4SPZ5VF2CURIBo0nI-IbjoPl81sfefpBExpaLfL7p5AaqaGd7MWXs_c5FGTm2b8hSrZIoHIBeVsvx_j_8k_vSmMU-6YFpRXZUIveWPnT-VDxhyp2-UJbqGw6BxIikPrtFPV1Ma0Gj4z29gq-m9HaL-fo2EXUfhUqUcjice7fF7SqYjb92hZX5rL56XYtCZShlY4ucRn6o3pITRGUsyZ4GWNrLkvVl6ujk-Zi33mxJhFca13NOCRM80G1p9PbFhQQeXy-6PKIJYqPvXsLDdW7MAoW4fh8ksQ5HhSyG1X7JiCTKBkgwSAqTky3M8808CpltulrCUmXGlYHyM091IbAhw70LroaJHjjMKP5oMjBA"
-asins = ['B0D6B7MD6Z']
-count = 47
+access_token = "Atza|IwEBIOQ9jeGn_NPYcYqtld3cA7KK7363KdqUBJDYcV-B36zJhyrK6Y-Y5-KniyFw8G2FKH7c692VcEm7udUvYY2NwXqhbM1LLygPuF5lxd8Kw2zCjwFqYf_YqNaRQyJPnpfs3APlYrCrraKTahjA0oiF9E7yq3rz9LY1rs8HfsLVAsl6vn4CWCGFErxbD8wEK_xxQ1wWmLbLYEEYfZYqN487LAYpDtYXT51IrdiMv-KW0YUplyxxQ7zAYaEdMrXSmtbbO-7S78S4nILvj23no4OzbGyD7ws8pEnPNKP3OR9eVcycYSvDNzvQ1qpSiOWyujbaR6I9Xw3f0P75ejC0a6F51iyTASPdDLUlghzKb_02iS13ZLBhZW2-gtPp9xeIS77R1TWZHC8kwG-OKoM_ZA5uOfxIiVmOem_SwMTbkzCregW7DUIkAvpEu7ZVTEoUMJhJy-sjgL2ASd4x86mZFD64q9ja0f1DYU41XE3P1VXWfLGcog"
+asins = ['B07M7TLN6G']
+count = 10
 result = get_asins(access_token, client_id, profile_id, asins, count)
 print(json.dumps(result, indent=4, ensure_ascii=False))
 
 if result:
     df = pd.DataFrame(result, columns=["asins"])
-    file_name = "B0D6B7MD6Z-IT.xlsx"
+    file_name = "B09BZ8VSYL-us.xlsx"
     df.to_excel(file_name, index=False)
 
     print(f"文件保存到{file_name}:")
     print(json.dumps(result, indent=4, ensure_ascii=False))
 else:
-    print("No ASINs returned.")
+    print("没有相关ASIN返回")
